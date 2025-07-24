@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WriteUpProject.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="800"
              x:Class="WriteUpProject.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
@@ -12,5 +12,44 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<ScrollViewer>
+	<StackPanel Margin="20" Spacing="10">					
+		<TextBlock Text="Network"/>
+		<ComboBox SelectedIndex="2" x:Name="NetworkCombobox">
+			<ComboBoxItem>Main</ComboBoxItem>
+			<ComboBoxItem>Testnet</ComboBoxItem>
+			<ComboBoxItem>Testnet4</ComboBoxItem>
+			<ComboBoxItem>RegTest</ComboBoxItem>
+		</ComboBox>
+		
+		<TextBlock Text="Message (max 80 bytes):"/>
+		<TextBox x:Name="MessageBox" Watermark="Your custom message"/>
+
+		<TextBlock Text="UTXO TXID:"/>
+		<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID"/>
+
+		<TextBlock Text="UTXO VOUT:"/>
+		<TextBox x:Name="VoutBox" Watermark="vout of the input"/>
+
+		<TextBlock Text="UTXO Amount (sats):"/>
+		<TextBox x:Name="AmountBox"/>
+
+		<TextBlock Text="Fund Address:"/>
+		<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend"/>
+
+		<Separator />
+
+		<TextBlock Text="Change Address:"/>
+		<TextBox x:Name="ChangeAddressBox"/>
+
+		<TextBlock Text="Fee (sats, default 100):"/>
+		<TextBox x:Name="FeeBox"/>
+
+		<Button Click="Button_Click" HorizontalAlignment="Center">Generate TX</Button>
+		<Separator />
+		
+		<TextBlock Text="Transaction Hex:"/>
+		<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True" />
+	</StackPanel>
+	</ScrollViewer>
 </UserControl>
