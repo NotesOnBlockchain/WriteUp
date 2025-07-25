@@ -23,10 +23,12 @@
 		</ComboBox>
 		
 		<TextBlock Text="Message (max 80 bytes):"/>
-		<TextBox x:Name="MessageBox" Watermark="Your custom message"/>
+		<TextBox x:Name="MessageBox" Watermark="Your custom message" TextChanged="OnMessageChanged"/>
+		<TextBlock x:Name="MessageByteCounter" Foreground="Gray"/>
 
 		<TextBlock Text="UTXO TXID:"/>
-		<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID"/>
+		<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged"/>
+		<TextBlock x:Name="TxIdValidator" Foreground="Gray"/>
 
 		<TextBlock Text="UTXO VOUT:"/>
 		<TextBox x:Name="VoutBox" Watermark="vout of the input"/>
@@ -35,17 +37,20 @@
 		<TextBox x:Name="AmountBox"/>
 
 		<TextBlock Text="Fund Address:"/>
-		<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend"/>
+		<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend from" TextChanged="FundAddressChanged"/>
+		<TextBlock x:Name="FundAddressValidator" Foreground="Gray"/>
 
 		<Separator />
 
 		<TextBlock Text="Change Address:"/>
-		<TextBox x:Name="ChangeAddressBox"/>
+		<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged"/>
+		<TextBlock x:Name="ChangeAddressValidator" Foreground="Gray"/>
 
 		<TextBlock Text="Fee (sats, default 100):"/>
 		<TextBox x:Name="FeeBox"/>
 
-		<Button Click="Button_Click" HorizontalAlignment="Center">Generate TX</Button>
+		<Button Click="GenerateTXHex" HorizontalAlignment="Center">Generate TX</Button>
+		<Button Click="ResetForm" HorizontalAlignment="Right">Reset</Button>
 		<Separator />
 		
 		<TextBlock Text="Transaction Hex:"/>

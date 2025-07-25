@@ -1,6 +1,7 @@
 ﻿using NBitcoin;
 using System;
 using System.Net;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WriteUpProject.Crypto
 {
@@ -53,6 +54,31 @@ namespace WriteUpProject.Crypto
             tx.Outputs.Add(changeOutput);
             
             return tx.ToHex();
+        }
+
+        public static bool TryParseAddress(string address, Network network)
+        {
+            // Too long URIs/Bitcoin address are unsupported.
+            if (address.Length > 1000)
+            {
+                return false;
+            }
+
+            // Parse a Bitcoin address (not BIP21 URI string)
+            if (!address.StartsWith("bitcoin:", StringComparison.OrdinalIgnoreCase))
+            {
+                try
+                {
+                    Network.Parse<BitcoinAddress>(address, network);
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }
