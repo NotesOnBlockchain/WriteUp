@@ -3,9 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WriteUpProject.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="800"
+             mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="800"
              x:Class="WriteUpProject.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+			 Background="{DynamicResource PrimaryBackgroundColor}">
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -14,46 +15,43 @@
 
 	<ScrollViewer>
 	<StackPanel Margin="20" Spacing="10">					
-		<TextBlock Text="Network"/>
+		<TextBlock Text="Network:"/>
 		<ComboBox SelectedIndex="2" x:Name="NetworkCombobox">
-			<ComboBoxItem>Main</ComboBoxItem>
-			<ComboBoxItem>Testnet</ComboBoxItem>
-			<ComboBoxItem>Testnet4</ComboBoxItem>
-			<ComboBoxItem>RegTest</ComboBoxItem>
+			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Main</ComboBoxItem>
+			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Testnet</ComboBoxItem>
+			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Testnet4</ComboBoxItem>
+			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">RegTest</ComboBoxItem>
 		</ComboBox>
 		
 		<TextBlock Text="Message (max 80 bytes):"/>
 		<TextBox x:Name="MessageBox" Watermark="Your custom message" TextChanged="OnMessageChanged"/>
-		<TextBlock x:Name="MessageByteCounter" Foreground="Gray"/>
+		<TextBlock x:Name="MessageByteCounter" Foreground="{DynamicResource PrimaryTextColor}"/>
 
-		<TextBlock Text="UTXO TXID:"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:"/>
 		<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged"/>
-		<TextBlock x:Name="TxIdValidator" Foreground="Gray"/>
+		<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
 
-		<TextBlock Text="UTXO VOUT:"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO VOUT:"/>
 		<TextBox x:Name="VoutBox" Watermark="vout of the input"/>
 
-		<TextBlock Text="UTXO Amount (sats):"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO Amount (sats):"/>
 		<TextBox x:Name="AmountBox"/>
 
-		<TextBlock Text="Fund Address:"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fund Address:"/>
 		<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend from" TextChanged="FundAddressChanged"/>
-		<TextBlock x:Name="FundAddressValidator" Foreground="Gray"/>
+		<TextBlock x:Name="FundAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
 
-		<Separator />
-
-		<TextBlock Text="Change Address:"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:"/>
 		<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged"/>
-		<TextBlock x:Name="ChangeAddressValidator" Foreground="Gray"/>
+		<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
 
-		<TextBlock Text="Fee (sats, default 100):"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fee (sats, default 100):"/>
 		<TextBox x:Name="FeeBox"/>
 
 		<Button Click="GenerateTXHex" HorizontalAlignment="Center">Generate TX</Button>
-		<Button Click="ResetForm" HorizontalAlignment="Right">Reset</Button>
-		<Separator />
+		<Button Click="ResetForm" HorizontalAlignment="Center">Reset</Button>
 		
-		<TextBlock Text="Transaction Hex:"/>
+		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:"/>
 		<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True" />
 	</StackPanel>
 	</ScrollViewer>
