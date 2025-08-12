@@ -41,6 +41,7 @@ public partial class MainView : UserControl
         }
 
         ResultHexBox.Text = Helper.BuildTx(network, messageBytes, fundingTxID, vout, amountSats, fundAddress, changeAddress, fee);
+        ResultHexPanel.IsVisible = true;
     }
 
     private void ResetForm(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
