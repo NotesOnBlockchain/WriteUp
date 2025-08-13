@@ -65,54 +65,9 @@
 
 		<Button Click="GenerateTXHex" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="#1A2A80">Generate TX</Button>
 
-		<StackPanel Grid.Row="7" x:Name="ResultHexPanel" IsVisible="False">
-			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:"/>
-			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True"/>
+		<StackPanel Grid.Row="7" x:Name="ResultHexPanel" IsVisible="False" Grid.ColumnSpan="2">
+			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:" Padding="10 5"/>
+			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True" Margin="10 0"/>
 		</StackPanel>
-
 	</Grid>
-	
-	<!--
-	<ScrollViewer>
-	<StackPanel Margin="20" Spacing="10">					
-		<TextBlock Text="Network:"/>
-		<ComboBox SelectedIndex="2" x:Name="NetworkCombobox">
-			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Main</ComboBoxItem>
-			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Testnet</ComboBoxItem>
-			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">Testnet4</ComboBoxItem>
-			<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}">RegTest</ComboBoxItem>
-		</ComboBox>
-		
-		<TextBlock Text="Message (max 80 bytes):"/>
-		<TextBox x:Name="MessageBox" Watermark="Your custom message" TextChanged="OnMessageChanged"/>
-		<TextBlock x:Name="MessageByteCounter" Foreground="{DynamicResource PrimaryTextColor}"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:"/>
-		<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged"/>
-		<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO VOUT:"/>
-		<TextBox x:Name="VoutBox" Watermark="vout of the input"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO Amount (sats):"/>
-		<TextBox x:Name="AmountBox"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fund Address:"/>
-		<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend from" TextChanged="FundAddressChanged"/>
-		<TextBlock x:Name="FundAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:"/>
-		<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged"/>
-		<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
-
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fee (sats, default 100):"/>
-		<TextBox x:Name="FeeBox"/>
-
-		<Button Click="GenerateTXHex" HorizontalAlignment="Center">Generate TX</Button>
-		<Button Click="ResetForm" HorizontalAlignment="Center">Reset</Button>
-		
-		<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:"/>
-		<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True" />
-	</StackPanel>
-	</ScrollViewer> -->
 </UserControl>
