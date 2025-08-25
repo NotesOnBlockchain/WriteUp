@@ -65,9 +65,10 @@
 
 		<Button Click="GenerateTXHex" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="#1A2A80">Generate TX</Button>
 
-		<StackPanel Grid.Row="7" x:Name="ResultHexPanel" IsVisible="False" Grid.ColumnSpan="2">
+		<StackPanel Grid.Row="7" x:Name="ResultHexPanel" IsVisible="True" Grid.ColumnSpan="2">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:" Padding="10 5"/>
-			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="150" IsReadOnly="True" Margin="10 0"/>
+			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="100" IsReadOnly="True" Margin="10 0"/>
+			<Button Click="SavePSBT" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" Background="#1A2A80" Margin="10">Save PSBT</Button>
 		</StackPanel>
 	</Grid>
 </UserControl>

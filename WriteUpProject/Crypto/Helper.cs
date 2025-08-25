@@ -1,7 +1,5 @@
 ﻿using NBitcoin;
 using System;
-using System.Net;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WriteUpProject.Crypto
 {
@@ -32,7 +30,7 @@ namespace WriteUpProject.Crypto
             return BitcoinAddress.Create(address, network);
         }
 
-        public static string BuildTx(Network network, byte[] messageBytes, string fundingTxID, uint vout, int amountSats,BitcoinAddress fundAddress, BitcoinAddress changeAddress, int fee)
+        public static PSBT BuildTx(Network network, byte[] messageBytes, string fundingTxID, uint vout, int amountSats,BitcoinAddress fundAddress, BitcoinAddress changeAddress, int fee)
         {
             Script opReturnScript = TxNullDataTemplate.Instance.GenerateScriptPubKey(messageBytes);
             TxOut opReturnOutput = new(Money.Zero, opReturnScript);
@@ -53,7 +51,7 @@ namespace WriteUpProject.Crypto
             tx.Outputs.Add(opReturnOutput);
             tx.Outputs.Add(changeOutput);
             
-            return tx.ToHex();
+            return tx.CreatePSBT(network);
         }
 
         public static bool TryParseAddress(string address, Network network)
