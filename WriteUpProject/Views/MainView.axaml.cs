@@ -36,7 +36,7 @@ public partial class MainView : UserControl
         string fundingTxID = TxIdBox.Text ?? "";
         uint vout = uint.Parse(VoutBox.Text ?? "");
         int amountSats = int.Parse(AmountBox.Text ?? "");
-        string fundAddressStr = FundAddressBox.Text ?? "";
+        string fundAddressStr = FundAddressBox.Text ?? ""; // Remoev this and FundAddressBox
         BitcoinAddress fundAddress = Helper.GetAddressFromString(fundAddressStr, network);
         string changeAddressStr = ChangeAddressBox.Text ?? "";
         BitcoinAddress changeAddress = Helper.GetAddressFromString(changeAddressStr, network);
@@ -47,8 +47,8 @@ public partial class MainView : UserControl
             fee = userFee;
         }
 
-        Transaction = Helper.BuildTx(network, messageBytes, fundingTxID, vout, amountSats, fundAddress, changeAddress, fee);
-        ResultHexBox.Text = Transaction?.ToHex() ?? string.Empty;
+        Transaction = Helper.BuildTx(network, messageBytes, fundingTxID, vout, amountSats, changeAddress, fee);
+        ResultHexBox.Text = Transaction?.GetGlobalTransaction().ToHex() ?? string.Empty;
         if(!string.IsNullOrEmpty(ResultHexBox.Text))
         {
             ResultHexPanel.IsVisible = true;

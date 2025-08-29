@@ -30,28 +30,26 @@ namespace WriteUpProject.Crypto
             return BitcoinAddress.Create(address, network);
         }
 
-        public static PSBT BuildTx(Network network, byte[] messageBytes, string fundingTxID, uint vout, int amountSats,BitcoinAddress fundAddress, BitcoinAddress changeAddress, int fee)
+        public static PSBT BuildTx(Network network, byte[] messageBytes, string fundingTxID, uint vout, int amountSats, BitcoinAddress changeAddress, int fee)
         {
             Script opReturnScript = TxNullDataTemplate.Instance.GenerateScriptPubKey(messageBytes);
             TxOut opReturnOutput = new(Money.Zero, opReturnScript);
 
             Money inputAmount = new Money(amountSats, MoneyUnit.Satoshi);
             OutPoint outpointOfFund = new OutPoint(uint256.Parse(fundingTxID), vout);
-            TxOut utxo = new TxOut(inputAmount, fundAddress);
+
             TxIn txIn = new TxIn(outpointOfFund);
-            Coin coin = new Coin(outpointOfFund, utxo);
 
             Money txFee = new Money(fee, MoneyUnit.Satoshi);
             Money changeAmount = inputAmount - txFee;
             TxOut changeOutput = new TxOut(changeAmount, changeAddress);
 
-            // Build TX
-            Transaction tx = Transaction.Create(network);
+            var tx = network.CreateTransaction();
             tx.Inputs.Add(txIn);
-            tx.Outputs.Add(opReturnOutput);
             tx.Outputs.Add(changeOutput);
-            
-            return tx.CreatePSBT(network);
+            tx.Outputs.Add(opReturnOutput);
+
+            return PSBT.FromTransaction(tx, network);
         }
 
         public static bool TryParseAddress(string address, Network network)
