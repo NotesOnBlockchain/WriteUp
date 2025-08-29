@@ -39,20 +39,14 @@
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO Amount (sats):" Padding="10 5"/>
 			<TextBox x:Name="AmountBox" Margin="10 0"/>
 		</StackPanel>
-		
-		<StackPanel Grid.Row="4" Grid.Column="0">
-			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fund Address:" Padding="10 5"/>
-			<TextBox x:Name="FundAddressBox" Watermark="Script of the UTXO you want to spend from" TextChanged="FundAddressChanged" Margin="10 0"/>
-			<TextBlock x:Name="FundAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
-		</StackPanel>
 
-		<StackPanel Grid.Row="4" Grid.Column="1">
+		<StackPanel Grid.Row="4" Grid.Column="0">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:" Padding="10 5"/>
 			<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged" Margin="10 0"/>
 			<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
 		</StackPanel>
 
-		<StackPanel Grid.Row="5" Grid.Column="1">
+		<StackPanel Grid.Row="4" Grid.Column="1">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Fee (sats, default 100):" Padding="10 5"/>
 			<TextBox x:Name="FeeBox" Margin="10 5 300 0"/>
 		</StackPanel>

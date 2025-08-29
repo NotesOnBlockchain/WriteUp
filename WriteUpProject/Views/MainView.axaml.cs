@@ -36,8 +36,6 @@ public partial class MainView : UserControl
         string fundingTxID = TxIdBox.Text ?? "";
         uint vout = uint.Parse(VoutBox.Text ?? "");
         int amountSats = int.Parse(AmountBox.Text ?? "");
-        string fundAddressStr = FundAddressBox.Text ?? ""; // Remoev this and FundAddressBox
-        BitcoinAddress fundAddress = Helper.GetAddressFromString(fundAddressStr, network);
         string changeAddressStr = ChangeAddressBox.Text ?? "";
         BitcoinAddress changeAddress = Helper.GetAddressFromString(changeAddressStr, network);
 
@@ -61,7 +59,6 @@ public partial class MainView : UserControl
         TxIdBox.Text = "";
         VoutBox.Text = "";
         AmountBox.Text = "";
-        FundAddressBox.Text = "";
         ChangeAddressBox.Text = "";
         FeeBox.Text = "";
     }
@@ -94,23 +91,6 @@ public partial class MainView : UserControl
         {
             TxIdValidator.Text = "⚠️ Invalid TXID";
             TxIdValidator.Foreground = Brushes.Red;
-        }
-    }
-
-    public void FundAddressChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e)
-    {
-        int networkOptionIndex = NetworkCombobox.SelectedIndex;
-        Network network = Helper.SupportedNetworks[networkOptionIndex];
-
-        if (Helper.TryParseAddress(FundAddressBox.Text ?? "", network))
-        {
-            FundAddressValidator.Text = "✅ Valid Address";
-            FundAddressValidator.Foreground = Brushes.Green;
-        }
-        else
-        {
-            FundAddressValidator.Text = "⚠️ Invalid Address";
-            FundAddressValidator.Foreground = Brushes.Red;
         }
     }
 
