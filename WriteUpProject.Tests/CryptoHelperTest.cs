@@ -22,10 +22,10 @@ namespace WriteUpProject.Tests
             var txIdOfFunding = "4df78304f2e84df58f7ffa58a4d8ae180a2bc2f42619986a996330c2ead149bc";
             uint vout = 0;
             var amountOfFundsInSats = 500000;
-            int txFeeForCustomTX = 1000;
+            FeeRate feeRate = new FeeRate(2000);
 
             // Test BuildTx
-            var psbt = Helper.BuildTx(Network, messageBytes, txIdOfFunding, vout, amountOfFundsInSats, changeAddress, txFeeForCustomTX);
+            var psbt = Helper.BuildTx(Network, messageBytes, txIdOfFunding, vout, amountOfFundsInSats, changeAddress, feeRate);
 
             // Add coin so we can sign the psbt
             var coin = new Coin(new OutPoint(uint256.Parse(txIdOfFunding), vout), new TxOut(new Money(amountOfFundsInSats, MoneyUnit.Satoshi), fundScript));

@@ -39,13 +39,13 @@ public partial class MainView : UserControl
         string changeAddressStr = ChangeAddressBox.Text ?? "";
         BitcoinAddress changeAddress = Helper.GetAddressFromString(changeAddressStr, network);
 
-        int fee = 100;
-        if (int.TryParse(FeeBox.Text, out var userFee))
+        FeeRate feeRate = new FeeRate(2000);
+        if (int.TryParse(FeeBox.Text, out int userFee))
         {
-            fee = userFee;
+            feeRate = new FeeRate((long)userFee * 1000);
         }
 
-        Transaction = Helper.BuildTx(network, messageBytes, fundingTxID, vout, amountSats, changeAddress, fee);
+        Transaction = Helper.BuildTx(network, messageBytes, fundingTxID, vout, amountSats, changeAddress, feeRate);
         ResultHexBox.Text = Transaction?.GetGlobalTransaction().ToHex() ?? string.Empty;
         if(!string.IsNullOrEmpty(ResultHexBox.Text))
         {
