@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+	  <ComponentGroup Id="AppComponents">
+		  <Files Directory="PUBLISHFOLDER" Include="**"></Files>
+	  </ComponentGroup>
+  </Fragment>
+</Wix>

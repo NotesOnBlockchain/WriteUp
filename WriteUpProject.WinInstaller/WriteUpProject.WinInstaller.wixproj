@@ -1,0 +1,18 @@
+﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+  <ItemGroup>
+    <ProjectReference Include="..\WriteUpProject.Desktop\WriteUpProject.Desktop.csproj" />
+  </ItemGroup>
+
+	<PropertyGroup>
+		<OutputType>Package</OutputType>
+		<TargetFramework>net472</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<HarvestDirectory Include="$(MSBuildProjectDirectory)\..\WriteUpProject.Desktop\bin\Release\net8.0">
+			<ComponentGroupName>AppComponents</ComponentGroupName>
+			<DirectoryRefId>INSTALLFOLDER</DirectoryRefId>
+			<PreprocessorVariable>PublishDir</PreprocessorVariable>
+		</HarvestDirectory>
+	</ItemGroup>
+</Project>
