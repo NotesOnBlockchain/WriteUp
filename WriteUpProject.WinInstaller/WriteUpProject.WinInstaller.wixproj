@@ -3,6 +3,10 @@
     <ProjectReference Include="..\WriteUpProject.Desktop\WriteUpProject.Desktop.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="WixToolset.UI.wixext" Version="6.*" />
+	</ItemGroup>
+
 	<PropertyGroup>
 		<OutputType>Package</OutputType>
 		<TargetFramework>net472</TargetFramework>
