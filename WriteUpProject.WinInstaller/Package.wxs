@@ -10,7 +10,19 @@
 	  
 	  <Property Id="WIXUI_INSTALLDIR" Value="TARGETDIR" />
 
-	  <ui:WixUI Id="WixUI_InstallDir" />
+	  <UI>
+		  <ui:WixUI Id="WixUI_InstallDir" />
+		  <Publish Dialog="WelcomeDlg"
+				Control="Next"
+				Event="NewDialog"
+				Value="InstallDirDlg"
+				Order="2"></Publish>
+		  <Publish Dialog="InstallDirDlg"
+				Control="Back"
+				Event="NewDialog"
+				Value="WelcomeDlg"
+				Order="2"></Publish>
+	  </UI>
 
 
 	  <Feature Id="Main">
