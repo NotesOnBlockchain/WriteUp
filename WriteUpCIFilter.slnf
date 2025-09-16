@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "WriteUp.sln",
+    "projects": [
+      "WriteUpProject\WriteUpProject.csproj",
+      "WriteUpProject.Desktop\WriteUpProject.Desktop.csproj",
+	  "WriteUpProject.Tests\WriteUpProject.Tests.csproj"
+    ]
+  }
+}
