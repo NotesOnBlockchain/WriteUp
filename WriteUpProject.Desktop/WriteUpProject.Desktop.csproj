@@ -7,6 +7,8 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+	<ApplicationIcon>Assets\writeuplogo.ico</ApplicationIcon>
+	<PackageIcon>Assets\writeuplogo.ico</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +19,15 @@
     <ProjectReference Include="..\WriteUpProject\WriteUpProject.csproj" />
   </ItemGroup>
 
-	<ItemGroup>
+    <ItemGroup>
 		<None Include="..\LICENSE" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Update="Assets\**"></AvaloniaResource>
+    </ItemGroup>
+
+	<ItemGroup>
+		<None Include="Assets\writeuplogo.ico" CopyToOutputDirectory="PreserveNewest" ></None>
 	</ItemGroup>
 </Project>

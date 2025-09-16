@@ -6,7 +6,6 @@
         xmlns:views="clr-namespace:WriteUpProject.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WriteUpProject.Views.MainWindow"
-        Icon="/Assets/writeuplogo.png"
         Title="WriteUpProject">
-        <views:MainView />
+	<views:MainView />
 </Window>
