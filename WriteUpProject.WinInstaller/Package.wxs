@@ -10,6 +10,9 @@
 	  
 	  <Property Id="WIXUI_INSTALLDIR" Value="TARGETDIR" />
 
+	  <Icon Id="AppIcon" SourceFile="Assets\writeuplogo.ico" />
+	  <Property Id="ARPPRODUCTICON" Value="AppIcon" />
+
 	  <UI>
 		  <ui:WixUI Id="WixUI_InstallDir" />
 		  <Publish Dialog="WelcomeDlg"
