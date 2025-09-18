@@ -90,22 +90,10 @@ namespace WriteUpProject.Crypto
             // Add a P2WPKH dummy witness (sig ~72B, pubkey 33B) so vsize is realistic pre-signing
             tx.Inputs[0].WitScript = new WitScript(new byte[][] { new byte[72], new byte[33] });
 
-            // First pass: fee with change output present
             int vsize = tx.GetVirtualSize();
             Money fee = feeRate.GetFee(vsize);
 
-            Money change = inputAmount - fee; // only change bears value in this layout
-            var changeOut = new TxOut(change, changeScriptP2WPKH);
-
-            // If change would be dust at this feerate, drop it and recompute fee without change
-            if (changeOut.IsDust())
-            {
-                tx.Outputs.RemoveAt(0); // drop change
-                vsize = tx.GetVirtualSize();
-                fee = feeRate.GetFee(vsize);
-                change = Money.Zero;
-            }
-
+            Money change = inputAmount - fee;
             return change;
         }
     }

@@ -22,7 +22,7 @@ namespace WriteUpProject.Tests
             var txIdOfFunding = "4df78304f2e84df58f7ffa58a4d8ae180a2bc2f42619986a996330c2ead149bc";
             uint vout = 0;
             var amountOfFundsInSats = 500000;
-            FeeRate feeRate = new FeeRate(2000);
+            FeeRate feeRate = new FeeRate((long)2000);
 
             // Test BuildTx
             var psbt = Helper.BuildTx(Network, messageBytes, txIdOfFunding, vout, amountOfFundsInSats, changeAddress, feeRate);
