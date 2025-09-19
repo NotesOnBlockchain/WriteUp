@@ -9,6 +9,7 @@ PUBLISH_DIR="dist/${RUNTIME}"
 
 echo "=== Cleaning up ==="
 rm -rf "/home/adam/Desktop/WriteUpApp/${PUBLISH_DIR}"
+mkdir "/home/adam/Desktop/WriteUpApp/dist"
 mkdir "/home/adam/Desktop/WriteUpApp/${PUBLISH_DIR}"
 
 echo "=== Publishing ${APP_NAME} for ${RUNTIME} ==="
