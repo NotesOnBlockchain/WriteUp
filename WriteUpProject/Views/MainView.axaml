@@ -27,7 +27,7 @@
 		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:" Padding="10 5"/>
 			<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}" />
-			<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="10 0"/>
+			<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="15 2 0 0"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="0">
@@ -43,7 +43,7 @@
 		<StackPanel Grid.Row="4" Grid.Column="0">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:" Padding="10 5"/>
 			<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
-			<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
+			<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="15 2 0 0"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="4" Grid.Column="1">
