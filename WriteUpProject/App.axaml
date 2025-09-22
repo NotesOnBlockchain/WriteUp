@@ -10,9 +10,9 @@
     </Application.Styles>
 
 	<Application.Resources>
-		<SolidColorBrush x:Key="PrimaryBackgroundColor">#280A3E</SolidColorBrush>
-		<SolidColorBrush x:Key="PrimaryTextColor">#F2EDD1</SolidColorBrush>
-		<SolidColorBrush x:Key="PrimaryTextBoxBackground">#7A85C1</SolidColorBrush>
-		<SolidColorBrush x:Key="PrimaryButtonBackground">#E7D3D3</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryBackgroundColor">#100C08</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryTextColor">#F0FFF0</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryTextBoxBackground">#696969</SolidColorBrush>
+		<SolidColorBrush x:Key="PrimaryButtonBackground">#009e60</SolidColorBrush>
 	</Application.Resources>
 </Application>

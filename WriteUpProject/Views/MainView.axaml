@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WriteUpProject.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="1000"
+             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="800"
              x:Class="WriteUpProject.Views.MainView"
              x:DataType="vm:MainViewModel"
 			 Background="{DynamicResource PrimaryBackgroundColor}">
@@ -15,54 +15,54 @@
 
 	<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="*, *">
 			<TextBlock Text="Network:" Padding="10"/>
-			<ComboBox SelectedIndex="2" x:Name="NetworkCombobox" Grid.Row="1" Margin="5 0 0 0">
+			<ComboBox SelectedIndex="2" x:Name="NetworkCombobox" Grid.Row="1" Margin="5 0 0 10" Background="#2f4f4f">
 				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Main</ComboBoxItem>
 				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Testnet</ComboBoxItem>
 				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Testnet4</ComboBoxItem>
 				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">RegTest</ComboBoxItem>
 			</ComboBox>
 
-		<Button Click="ResetForm" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Background="#1A2A80" Margin="0 0 30 0">Reset</Button>
+		<Button Click="ResetForm" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Background="{DynamicResource PrimaryButtonBackground}" Margin="0 0 30 0">Reset</Button>
 
 		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:" Padding="10 5"/>
-			<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged" Margin="10 0"/>
-			<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
+			<TextBox x:Name="TxIdBox" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}" />
+			<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="10 0"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="0">
-			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO VOUT:" Padding="10 5"/>
-			<TextBox x:Name="VoutBox" Watermark="vout of the input" Margin="10 0"/>
+			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO VOUT:" Padding="10 5" />
+			<TextBox x:Name="VoutBox" Watermark="vout of the input" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="3" Grid.Column="1">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO Amount (sats):" Padding="10 5"/>
-			<TextBox x:Name="AmountBox" Margin="10 0"/>
+			<TextBox x:Name="AmountBox" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="4" Grid.Column="0">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:" Padding="10 5"/>
-			<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged" Margin="10 0"/>
+			<TextBox x:Name="ChangeAddressBox" TextChanged="ChangeAddressChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
 			<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}"/>
 		</StackPanel>
 
 		<StackPanel Grid.Row="4" Grid.Column="1">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="FeeRate (default: 2 s/b):" Padding="10 5"/>
-			<TextBox x:Name="FeeBox" Margin="10 5 300 0"/>
+			<TextBox x:Name="FeeBox" Margin="10 5 300 0" Background="{DynamicResource PrimaryTextBoxBackground}" />
 		</StackPanel>
 
 		<StackPanel Grid.Row="5" Grid.Column="0">
 			<TextBlock Text="Message (max 80 bytes):" Padding="10 5"/>
-			<TextBox x:Name="MessageBox" Watermark="Your custom message" TextChanged="OnMessageChanged" Margin="10 0"/>
+			<TextBox x:Name="MessageBox" Watermark="Your custom message" TextChanged="OnMessageChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
 			<TextBlock x:Name="MessageByteCounter" Foreground="{DynamicResource PrimaryTextColor}"/>
 		</StackPanel>
 
-		<Button Click="GenerateTXHex" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="#1A2A80">Generate TX</Button>
+		<Button Click="GenerateTXHex" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource PrimaryButtonBackground}">Generate TX</Button>
 
 		<StackPanel Grid.Row="7" x:Name="ResultHexPanel" IsVisible="True" Grid.ColumnSpan="2">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Transaction Hex:" Padding="10 5"/>
-			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="100" IsReadOnly="True" Margin="10 0"/>
-			<Button Click="SavePSBT" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" Background="#1A2A80" Margin="10">Save PSBT</Button>
+			<TextBox x:Name="ResultHexBox" AcceptsReturn="True" Height="100" IsReadOnly="True" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
+			<Button Click="SavePSBT" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" Background="{DynamicResource PrimaryButtonBackground}" Margin="10">Save PSBT</Button>
 		</StackPanel>
 	</Grid>
 </UserControl>
