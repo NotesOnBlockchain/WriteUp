@@ -28,18 +28,13 @@ public partial class MainView : UserControl
         string message = MessageBox.Text ?? "";
         byte[] messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
 
-        if (message is null || !Helper.ValidateMessageBytesLength(messageBytes))
-        {
-            // show error
-        }
-
         string fundingTxID = TxIdBox.Text ?? "";
         uint vout = uint.Parse(VoutBox.Text ?? "");
         int amountSats = int.Parse(AmountBox.Text ?? "");
         string changeAddressStr = ChangeAddressBox.Text ?? "";
         BitcoinAddress changeAddress = Helper.GetAddressFromString(changeAddressStr, network);
 
-        FeeRate feeRate = new FeeRate(2000);
+        FeeRate feeRate = new FeeRate((Int64)2000);
         if (int.TryParse(FeeBox.Text, out int userFee))
         {
             feeRate = new FeeRate((long)userFee * 1000);
