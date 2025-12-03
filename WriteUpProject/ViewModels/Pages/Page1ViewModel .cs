@@ -13,6 +13,9 @@ namespace WriteUpProject.ViewModels.Pages
     {
         private readonly NavigationService _navigationService;
         private string _selectedNetwork = "Main";
+        private string _fundingTxID;
+        private string _vout;
+        private string _amountValue;
 
         public List<string> Networks { get; } = new()
         {
@@ -27,6 +30,25 @@ namespace WriteUpProject.ViewModels.Pages
             get => _selectedNetwork;
             set => SetProperty(ref _selectedNetwork, value);
         }
+
+        public string FundingTxId
+        {
+            get => _fundingTxID;
+            set => SetProperty(ref _fundingTxID, value);
+        }
+
+        public string Vout 
+        {
+            get => _vout;
+            set => SetProperty(ref _vout, value);
+        }
+
+        public string AmountBox 
+        {
+            get => _amountValue;
+            set => SetProperty(ref _amountValue, value);
+        }
+
 
 
         public ICommand NavigateToPage2Command { get; }
