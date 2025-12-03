@@ -1,0 +1,34 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WriteUpProject.ViewModels.Pages"
+             x:Class="WriteUpProject.Views.Pages.Page1View"
+             x:DataType="vm:Page1ViewModel">
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Network:" Padding="10"/>
+			<ComboBox SelectedIndex="2" x:Name="NetworkCombobox" Margin="5 0 0 10" Background="#2f4f4f"
+                ItemsSource="{Binding Networks}"
+                SelectedItem="{Binding SelectedNetwork}" >
+             <ComboBox.Styles>
+				 <Style Selector="ComboBoxItem">
+					 <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+                    <Setter Property="Background" Value="{DynamicResource PrimaryButtonBackground}"/>
+                 </Style>
+             </ComboBox.Styles>
+             </ComboBox>
+
+        <!-- TXID -->
+        <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:" Padding="10 5"/>
+		<TextBox x:Name="TxIdBox" Text="{Binding TxIDTextBoxValue" Watermark="Funding input's TXID" TextChanged="OnTxIdChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}" />
+		<TextBlock x:Name="TxIdValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="15 2 0 0"/>
+
+        <!-- VOUT -->
+        <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO VOUT:" Padding="10 5" />
+		<TextBox x:Name="VoutBox" Text="{Binding VoutTextBoxValue" Watermark="vout of the input" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
+
+        <!-- Amount -->
+        <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO Amount (sats):" Padding="10 5"/>
+		<TextBox x:Name="AmountBox" Margin="10 0" Text="{Binding AmountBoxValue" Background="{DynamicResource PrimaryTextBoxBackground}"/>
+
+        <Button Content="Next" Command="{Binding NavigateToPage2Command}"/>
+    </StackPanel>
+</UserControl>

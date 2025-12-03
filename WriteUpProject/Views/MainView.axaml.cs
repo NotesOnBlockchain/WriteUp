@@ -1,25 +1,17 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Logging;
-using Avalonia.Media;
-using Avalonia.Platform.Storage;
 using NBitcoin;
-using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using WriteUpProject.Crypto;
-using WriteUpProject.FileSaveHelper;
+using WriteUpProject.ViewModels;
 
 namespace WriteUpProject.Views;
 
-public partial class MainView : UserControl
+public partial class MainView : Window
 {
     public MainView()
     {
         InitializeComponent();
+        DataContext = new MainViewModel();
     }
-
+    /*
     private void GenerateTXHex(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         int networkOptionIndex = NetworkCombobox.SelectedIndex;
@@ -128,6 +120,7 @@ public partial class MainView : UserControl
         }
         
     }
+    */
 
     public PSBT? Transaction { get; set; }
 }

@@ -1,0 +1,12 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WriteUpProject.ViewModels.Pages"
+             x:Class="WriteUpProject.Views.Pages.Page3View"
+             x:DataType="vm:Page3ViewModel">
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Page 3" FontSize="24" FontWeight="Bold"/>
+        <TextBlock Text="{Binding DataFromPage1, StringFormat='From Page 1: {0}'}"/>
+        <TextBlock Text="{Binding DataFromPage2, StringFormat='From Page 2: {0}'}"/>
+        <Button Content="Back" Command="{Binding NavigateBackCommand}"/>
+    </StackPanel>
+</UserControl>

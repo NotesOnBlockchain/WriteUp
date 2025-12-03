@@ -6,6 +6,7 @@
         xmlns:views="clr-namespace:WriteUpProject.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WriteUpProject.Views.MainWindow"
-        Title="WriteUpProject">
-	<views:MainView />
+        x:DataType="vm:MainViewModel"
+        Title="WriteUp">
+	<ContentControl Content="{Binding CurrentViewModel}" />
 </Window>

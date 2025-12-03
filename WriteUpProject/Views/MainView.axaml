@@ -12,18 +12,10 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-
+	<!--
 	<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
 			<Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" ColumnDefinitions="*, *">
-			<TextBlock Text="Network:" Padding="10"/>
-			<ComboBox SelectedIndex="2" x:Name="NetworkCombobox" Grid.Row="1" Margin="5 0 0 10" Background="#2f4f4f">
-				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Main</ComboBoxItem>
-				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Testnet</ComboBoxItem>
-				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">Testnet4</ComboBoxItem>
-				<ComboBoxItem Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource PrimaryButtonBackground}">RegTest</ComboBoxItem>
-			</ComboBox>
 
-		<Button Click="ResetForm" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" Background="{DynamicResource PrimaryButtonBackground}" Margin="0 0 30 0">Reset</Button>
 
 		<StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
 			<TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="UTXO TXID:" Padding="10 5"/>
@@ -66,5 +58,5 @@
 			<Button Click="SavePSBT" Grid.Row="8" Grid.ColumnSpan="2" HorizontalAlignment="Center" Background="{DynamicResource PrimaryButtonBackground}" Margin="10">Save PSBT</Button>
 		</StackPanel>
 	</Grid>
-	</ScrollViewer>
+	</ScrollViewer>		-->
 </UserControl>

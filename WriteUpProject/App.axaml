@@ -1,5 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WriteUpProject.ViewModels.Pages"
+             xmlns:views="clr-namespace:WriteUpProject.Views.Pages"
              x:Class="WriteUpProject.App"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -15,4 +17,16 @@
 		<SolidColorBrush x:Key="PrimaryTextBoxBackground">#696969</SolidColorBrush>
 		<SolidColorBrush x:Key="PrimaryButtonBackground">#009e60</SolidColorBrush>
 	</Application.Resources>
+
+	<Application.DataTemplates>
+        <DataTemplate DataType="vm:Page1ViewModel">
+            <views:Page1View/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:Page2ViewModel">
+            <views:Page2View/>
+        </DataTemplate>
+        <DataTemplate DataType="vm:Page3ViewModel">
+            <views:Page3View/>
+        </DataTemplate>
+    </Application.DataTemplates>
 </Application>
