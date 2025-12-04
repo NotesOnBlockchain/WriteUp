@@ -1,10 +1,12 @@
-﻿using ReactiveUI;
+﻿using NBitcoin;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WriteUpProject.Models;
 using WriteUpProject.Navigation;
 
 namespace WriteUpProject.ViewModels.Pages
@@ -61,7 +63,11 @@ namespace WriteUpProject.ViewModels.Pages
 
         private void NavigateToPage2()
         {
-            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, "SharedData"));
+            /* check for missing info */
+
+            Network network = Network.GetNetwork(SelectedNetwork) ?? throw new Exception("Invalid Network.");
+
+            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, new FundingTxInfo(network, FundingTxId, Vout, AmountBox)));
         }
     }
 }

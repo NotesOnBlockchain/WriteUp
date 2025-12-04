@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WriteUpProject.Models;
 using WriteUpProject.Navigation;
 
 namespace WriteUpProject.ViewModels.Pages
@@ -12,10 +13,10 @@ namespace WriteUpProject.ViewModels.Pages
     public class Page2ViewModel : ViewModelBase
     {
         private readonly NavigationService _navigationService;
-        private string _receivedData;
+        private FundingTxInfo _receivedData;
         private string _page2Data = "Data from Page 2";
 
-        public string ReceivedData
+        public FundingTxInfo ReceivedData
         {
             get => _receivedData;
             set => SetProperty(ref _receivedData, value);
@@ -30,7 +31,7 @@ namespace WriteUpProject.ViewModels.Pages
         public ICommand NavigateToPage3Command { get; }
         public ICommand NavigateBackCommand { get; }
 
-        public Page2ViewModel(NavigationService navigationService, string dataFromPage1)
+        public Page2ViewModel(NavigationService navigationService, FundingTxInfo dataFromPage1)
         {
             _navigationService = navigationService;
             ReceivedData = dataFromPage1;
@@ -41,7 +42,6 @@ namespace WriteUpProject.ViewModels.Pages
 
         private void NavigateToPage3()
         {
-            _navigationService.NavigateTo(new Page3ViewModel(_navigationService, ReceivedData, Page2Data));
         }
     }
 }
