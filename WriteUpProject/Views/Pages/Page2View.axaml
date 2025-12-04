@@ -5,9 +5,20 @@
              x:DataType="vm:Page2ViewModel">
     <StackPanel Margin="20" Spacing="10">
         <TextBlock Text="Page 2" FontSize="24" FontWeight="Bold"/>
-        <TextBlock Text="{Binding ReceivedData, StringFormat='Received: {0}'}"/>
-        <TextBox Text="{Binding Page2Data}" Watermark="Enter more data..."/>
-        <Button Content="Go to Page 3" Command="{Binding NavigateToPage3Command}"/>
+
+        <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="Change Address:" Padding="10 5"/>
+		<TextBox x:Name="ChangeAddressBox" Text="{Binding ChangeAddress}" TextChanged="ChangeAddressChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
+		<TextBlock x:Name="ChangeAddressValidator" Foreground="{DynamicResource PrimaryTextColor}" Margin="15 2 0 0"/>
+		
+        <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="FeeRate (default: 2 s/b):" Padding="10 5"/>
+		<TextBox x:Name="FeeBox" Margin="10 5 300 0" Text="{Binding FeeRate}" Background="{DynamicResource PrimaryTextBoxBackground}" />
+		
+        <TextBlock Text="Message (max 80 bytes):" Padding="10 5"/>
+		<TextBox x:Name="MessageBox" Watermark="Your custom message" Text="{Binding CustomMessage}" TextChanged="OnMessageChanged" Margin="10 0" Background="{DynamicResource PrimaryTextBoxBackground}"/>
+		<TextBlock x:Name="MessageByteCounter" Foreground="{DynamicResource PrimaryTextColor}"/>
+		
+
+        <Button Content="Finish and Save PSBT" Command="{Binding SavePSBT}"/>
         <Button Content="Back" Command="{Binding NavigateBackCommand}"/>
     </StackPanel>
 </UserControl>

@@ -8,5 +8,13 @@ namespace WriteUpProject.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void ChangeAddressChanged(object? sender, TextChangedEventArgs e)
+        {
+        }
+
+        private void OnMessageChanged(object? sender, TextChangedEventArgs e)
+        {
+        }
     }
 }

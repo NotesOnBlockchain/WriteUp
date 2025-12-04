@@ -1,9 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WriteUpProject.Models;
 using WriteUpProject.Navigation;
@@ -14,33 +9,41 @@ namespace WriteUpProject.ViewModels.Pages
     {
         private readonly NavigationService _navigationService;
         private FundingTxInfo _receivedData;
-        private string _page2Data = "Data from Page 2";
+        private string _changeAddress;
+        private string _feeRate;
+        private string _customMessage;
 
-        public FundingTxInfo ReceivedData
+        public string ChangeAddress
         {
-            get => _receivedData;
-            set => SetProperty(ref _receivedData, value);
+            get => _changeAddress;
+            set => SetProperty(ref _changeAddress, value);
         }
 
-        public string Page2Data
+        public string FeeRate
         {
-            get => _page2Data;
-            set => SetProperty(ref _page2Data, value);
+            get => _feeRate;
+            set => SetProperty(ref _feeRate, value);
         }
 
-        public ICommand NavigateToPage3Command { get; }
+        public string CustomMessage
+        {
+            get => _customMessage;
+            set => SetProperty(ref _customMessage, value);
+        }
+
+        public ICommand SavePSBT { get; }
         public ICommand NavigateBackCommand { get; }
 
         public Page2ViewModel(NavigationService navigationService, FundingTxInfo dataFromPage1)
         {
             _navigationService = navigationService;
-            ReceivedData = dataFromPage1;
+            _receivedData = dataFromPage1;
 
-            NavigateToPage3Command = ReactiveCommand.Create(NavigateToPage3);
+            SavePSBT = ReactiveCommand.Create(SavePSBTtoDrive);
             NavigateBackCommand = ReactiveCommand.Create(_navigationService.NavigateBack);
         }
 
-        private void NavigateToPage3()
+        private void SavePSBTtoDrive()
         {
         }
     }
