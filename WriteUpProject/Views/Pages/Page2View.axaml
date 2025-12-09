@@ -128,13 +128,14 @@
                     </StackPanel>
 
                     <!-- FeeRate -->
-                    <StackPanel Spacing="8" Grid.Column="0" Grid.Row="2">
+                    <StackPanel Spacing="8" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
                         <TextBlock Classes="label" Text="FeeRate (sat/vbyte)"/>
                         <TextBox x:Name="FeeRateBox" 
                                  Classes="modern-input"
                                  Text="{Binding FeeRate}" 
                                  Watermark="Enter fee rate (1-10)"
-                                 TextChanged="OnFeeRateChanged"/>
+                                 TextChanged="OnFeeRateChanged"
+                                 HorizontalAlignment="Left"/>
                         <TextBlock x:Name="FeeRateValidator" Classes="validator"/>
                     </StackPanel>
 
