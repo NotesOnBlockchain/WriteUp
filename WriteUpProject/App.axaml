@@ -25,8 +25,5 @@
         <DataTemplate DataType="vm:Page2ViewModel">
             <views:Page2View/>
         </DataTemplate>
-        <DataTemplate DataType="vm:Page3ViewModel">
-            <views:Page3View/>
-        </DataTemplate>
     </Application.DataTemplates>
 </Application>
