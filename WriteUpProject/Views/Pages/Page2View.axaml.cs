@@ -16,5 +16,9 @@ namespace WriteUpProject.Views.Pages
         private void OnMessageChanged(object? sender, TextChangedEventArgs e)
         {
         }
+
+        private void OnFeeRateChanged(object? sender, TextChangedEventArgs e)
+        {
+        }
     }
 }
