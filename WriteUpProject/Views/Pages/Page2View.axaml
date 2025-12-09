@@ -88,7 +88,7 @@
         <Style Selector="TextBlock.validator">
             <Setter Property="Foreground" Value="#ff6b6b"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Margin" Value="0 4 0 0"/>
+            <Setter Property="Margin" Value="0 0 0 0"/>
         </Style>
         
         <!-- Header Style -->
