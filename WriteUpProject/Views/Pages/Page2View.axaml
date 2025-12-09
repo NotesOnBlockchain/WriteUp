@@ -141,12 +141,12 @@
                     <!-- Message -->
                     <StackPanel Spacing="8" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3">
                         <TextBlock Classes="label" Text="Message"/>
-                        <TextBox x:Name="CustomMessageBox" 
+                        <TextBox x:Name="MessageBox" 
                                  Classes="modern-input"
                                  Text="{Binding CustomMessage}" 
                                  Watermark="Enter the change address"
                                  TextChanged="OnMessageChanged"/>
-                        <TextBlock x:Name="MessageValidator" Classes="validator"/>
+                        <TextBlock x:Name="MessageByteCounter" Classes="validator"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="4">

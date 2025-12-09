@@ -40,63 +40,6 @@ public partial class MainView : Window
         }
     }
 
-    private void ResetForm(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-    {
-        MessageBox.Text = "";
-        TxIdBox.Text = "";
-        VoutBox.Text = "";
-        AmountBox.Text = "";
-        ChangeAddressBox.Text = "";
-        FeeBox.Text = "";
-    }
-
-    public void OnMessageChanged(object? sender, TextChangedEventArgs e)
-    {
-        string msg = MessageBox.Text ?? "";
-        int byteLength = Encoding.UTF8.GetBytes(msg).Length;
-
-        if (byteLength > 80)
-        {
-            MessageByteCounter.Text = $"⚠️ Too long: {byteLength}/80 bytes";
-            MessageByteCounter.Foreground = Brushes.Red;
-        }
-        else
-        {
-            MessageByteCounter.Text = $"🧮 {byteLength}/80 bytes";
-            MessageByteCounter.Foreground = Brushes.Gray;
-        }
-    }
-    public void OnTxIdChanged(object? sender, TextChangedEventArgs e)
-    {
-        string txid = TxIdBox.Text?.Trim() ?? "";
-        if (uint256.TryParse(txid, out _))
-        {
-            TxIdValidator.Text = "✅ Valid TXID";
-            TxIdValidator.Foreground = Brushes.Green;
-        }
-        else
-        {
-            TxIdValidator.Text = "⚠️ Invalid TXID";
-            TxIdValidator.Foreground = Brushes.Red;
-        }
-    }
-
-    public void ChangeAddressChanged(object? sender, Avalonia.Controls.TextChangedEventArgs e)
-    {
-        int networkOptionIndex = NetworkCombobox.SelectedIndex;
-        Network network = Helper.SupportedNetworks[networkOptionIndex];
-
-        if (Helper.TryParseAddress(ChangeAddressBox.Text ?? "", network))
-        {
-            ChangeAddressValidator.Text = "✅ Valid Address";
-            ChangeAddressValidator.Foreground = Brushes.Green;
-        }
-        else
-        {
-            ChangeAddressValidator.Text = "⚠️ Invalid Address";
-            ChangeAddressValidator.Foreground = Brushes.Red;
-        }
-    }
 
     public async void SavePSBT(object? sender, RoutedEventArgs args)
     {
