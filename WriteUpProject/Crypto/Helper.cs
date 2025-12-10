@@ -1,5 +1,7 @@
 ﻿using NBitcoin;
 using System;
+using System.Text;
+using WriteUpProject.Models;
 
 namespace WriteUpProject.Crypto
 {
@@ -30,13 +32,26 @@ namespace WriteUpProject.Crypto
             return BitcoinAddress.Create(address, network);
         }
 
-        public static PSBT BuildTx(Network network, byte[] messageBytes, string fundingTxID, uint vout, int amountSats, BitcoinAddress changeAddress, FeeRate fee)
+        public static PSBT BuildTx(FundingTxInfo fundingTxInfo, OutputSideTxInfo outputSideTxInfo)
+        {
+            Network network = fundingTxInfo.Network;
+            byte[] messageBytes = Encoding.UTF8.GetBytes(outputSideTxInfo.Message);
+            BitcoinAddress changeAddress = GetAddressFromString(outputSideTxInfo.ChangeAddress, network);
+            uint256 fundingTxID = uint256.Parse(fundingTxInfo.FundingTxID);
+            uint vout = uint.Parse(fundingTxInfo.Vout);
+            int amountInSats = int.Parse(fundingTxInfo.AmountInSats);
+            FeeRate feeRate = new FeeRate(long.Parse(outputSideTxInfo.FeeRate) * 1000);
+
+            return BuildTx(network, messageBytes, fundingTxID, vout, amountInSats, changeAddress, feeRate);
+        }
+
+        public static PSBT BuildTx(Network network, byte[] messageBytes, uint256 fundingTxID, uint vout, int amountSats, BitcoinAddress changeAddress, FeeRate fee)
         {
             Script opReturnScript = TxNullDataTemplate.Instance.GenerateScriptPubKey(messageBytes);
             TxOut opReturnOutput = new(Money.Zero, opReturnScript);
 
             Money inputAmount = new Money(amountSats, MoneyUnit.Satoshi);
-            OutPoint outpointOfFund = new OutPoint(uint256.Parse(fundingTxID), vout);
+            OutPoint outpointOfFund = new OutPoint(fundingTxID, vout);
 
             TxIn txIn = new TxIn(outpointOfFund);
 

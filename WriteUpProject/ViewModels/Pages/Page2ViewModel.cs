@@ -1,5 +1,7 @@
-﻿using ReactiveUI;
+﻿using NBitcoin;
+using ReactiveUI;
 using System.Windows.Input;
+using WriteUpProject.Crypto;
 using WriteUpProject.Models;
 using WriteUpProject.Navigation;
 
@@ -45,6 +47,10 @@ namespace WriteUpProject.ViewModels.Pages
 
         private void SavePSBTtoDrive()
         {
+            OutputSideTxInfo outputSideTxInfo = new(ChangeAddress, FeeRate, CustomMessage);
+            PSBT psbt = Helper.BuildTx(_receivedData, outputSideTxInfo);
+
+
         }
     }
 }
