@@ -19,7 +19,7 @@ namespace WriteUpProject.Tests
             var fundScript = secret.PubKey.WitHash.ScriptPubKey;
             var changeAddress = extPubKey.Derive(1).ExtPubKey.PubKey.GetAddress(ScriptPubKeyType.Segwit, Network);
 
-            var txIdOfFunding = "4df78304f2e84df58f7ffa58a4d8ae180a2bc2f42619986a996330c2ead149bc";
+            var txIdOfFunding = uint256.Parse("4df78304f2e84df58f7ffa58a4d8ae180a2bc2f42619986a996330c2ead149bc");
             uint vout = 0;
             var amountOfFundsInSats = 500000;
             FeeRate feeRate = new FeeRate((long)2000);
@@ -28,7 +28,7 @@ namespace WriteUpProject.Tests
             var psbt = Helper.BuildTx(Network, messageBytes, txIdOfFunding, vout, amountOfFundsInSats, changeAddress, feeRate);
 
             // Add coin so we can sign the psbt
-            var coin = new Coin(new OutPoint(uint256.Parse(txIdOfFunding), vout), new TxOut(new Money(amountOfFundsInSats, MoneyUnit.Satoshi), fundScript));
+            var coin = new Coin(new OutPoint(txIdOfFunding, vout), new TxOut(new Money(amountOfFundsInSats, MoneyUnit.Satoshi), fundScript));
             psbt.AddCoins(coin);
             psbt.SignWithKeys(secret);
 
