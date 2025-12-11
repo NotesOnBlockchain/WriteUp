@@ -1,9 +1,12 @@
 ﻿using NBitcoin;
 using ReactiveUI;
+using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using WriteUpProject.Crypto;
 using WriteUpProject.Models;
 using WriteUpProject.Navigation;
+using WriteUpProject.Services;
 
 namespace WriteUpProject.ViewModels.Pages
 {
@@ -11,6 +14,7 @@ namespace WriteUpProject.ViewModels.Pages
     {
         private readonly NavigationService _navigationService;
         private FundingTxInfo _receivedData;
+        private readonly DialogService _dialogService;
         private string _changeAddress;
         private string _feeRate;
         private string _customMessage;
@@ -36,21 +40,22 @@ namespace WriteUpProject.ViewModels.Pages
         public ICommand SavePSBT { get; }
         public ICommand NavigateBackCommand { get; }
 
-        public Page2ViewModel(NavigationService navigationService, FundingTxInfo dataFromPage1)
+        public Page2ViewModel(NavigationService navigationService, DialogService dialogService, FundingTxInfo dataFromPage1)
         {
             _navigationService = navigationService;
             _receivedData = dataFromPage1;
+            _dialogService = dialogService;
 
-            SavePSBT = ReactiveCommand.Create(SavePSBTtoDrive);
+            SavePSBT = ReactiveCommand.CreateFromTask(SavePSBTtoDrive);
             NavigateBackCommand = ReactiveCommand.Create(_navigationService.NavigateBack);
         }
 
-        private void SavePSBTtoDrive()
+        private async Task SavePSBTtoDrive()
         {
             OutputSideTxInfo outputSideTxInfo = new(ChangeAddress, FeeRate, CustomMessage);
             PSBT psbt = Helper.BuildTx(_receivedData, outputSideTxInfo);
 
-
+            await _dialogService.ExportTransactionAsBinary(psbt);
         }
     }
 }

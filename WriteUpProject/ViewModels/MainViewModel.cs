@@ -1,4 +1,6 @@
-﻿using WriteUpProject.Navigation;
+﻿using Avalonia.Controls;
+using WriteUpProject.Navigation;
+using WriteUpProject.Services;
 using WriteUpProject.ViewModels.Pages;
 
 namespace WriteUpProject.ViewModels;
@@ -14,13 +16,12 @@ public class MainViewModel : ViewModelBase
         set => SetProperty(ref _currentViewModel, value);
     }
 
-    public MainViewModel()
+    public MainViewModel(DialogService dialogService)
     {
         _navigationService = new NavigationService();
         _navigationService.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
         // Start with Page1
-        _navigationService.NavigateTo(new Page1ViewModel(_navigationService));
+        _navigationService.NavigateTo(new Page1ViewModel(_navigationService, dialogService));
     }
 
     private void OnCurrentViewModelChanged(ViewModelBase viewModel)

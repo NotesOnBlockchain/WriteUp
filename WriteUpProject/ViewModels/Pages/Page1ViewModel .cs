@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WriteUpProject.Models;
 using WriteUpProject.Navigation;
+using WriteUpProject.Services;
 
 namespace WriteUpProject.ViewModels.Pages
 {
     public class Page1ViewModel : ViewModelBase
     {
         private readonly NavigationService _navigationService;
+        private readonly DialogService _dialogService;
         private string _selectedNetwork = "Main";
         private string _fundingTxID;
         private string _vout;
@@ -55,9 +57,10 @@ namespace WriteUpProject.ViewModels.Pages
 
         public ICommand NavigateToPage2Command { get; }
 
-        public Page1ViewModel(NavigationService navigationService)
+        public Page1ViewModel(NavigationService navigationService, DialogService dialogService)
         {
             _navigationService = navigationService;
+            _dialogService = dialogService;
             NavigateToPage2Command = ReactiveCommand.Create(NavigateToPage2);
         }
 
@@ -67,7 +70,7 @@ namespace WriteUpProject.ViewModels.Pages
 
             Network network = Network.GetNetwork(SelectedNetwork) ?? throw new Exception("Invalid Network.");
 
-            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, new FundingTxInfo(network, FundingTxId, Vout, AmountBox)));
+            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, _dialogService,new FundingTxInfo(network, FundingTxId, Vout, AmountBox)));
         }
     }
 }

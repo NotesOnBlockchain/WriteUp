@@ -145,7 +145,7 @@
                         <TextBox x:Name="MessageBox" 
                                  Classes="modern-input"
                                  Text="{Binding CustomMessage}" 
-                                 Watermark="Enter the change address"
+                                 Watermark="Enter your message to write up on the blockchain"
                                  TextChanged="OnMessageChanged"/>
                         <TextBlock x:Name="MessageByteCounter" Classes="validator"/>
                     </StackPanel>

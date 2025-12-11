@@ -9,7 +9,6 @@ public partial class MainView : Window
     public MainView()
     {
         InitializeComponent();
-        DataContext = new MainViewModel();
     }
     /*
     private void GenerateTXHex(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
