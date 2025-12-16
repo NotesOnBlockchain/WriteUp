@@ -4,6 +4,7 @@ using NBitcoin;
 using System.Linq;
 using System.Text;
 using WriteUpProject.Crypto;
+using WriteUpProject.Services;
 
 namespace WriteUpProject.Views.Pages
 {
@@ -19,7 +20,7 @@ namespace WriteUpProject.Views.Pages
             var networks = new[] { Network.Main, Network.TestNet, Network.TestNet4, Network.RegTest };
             var input = ChangeAddressBox.Text ?? string.Empty;
 
-            bool isValid = networks.Any(n => Helper.TryParseAddress(input, n));
+            bool isValid = networks.Any(n => ValidatorService.ValidateChangeAddress(input, n));
 
             if (isValid)
             {
@@ -36,16 +37,15 @@ namespace WriteUpProject.Views.Pages
         private void OnMessageChanged(object? sender, TextChangedEventArgs e)
         {
             string msg = MessageBox.Text ?? "";
-            int byteLength = Encoding.UTF8.GetBytes(msg).Length;
-
-            if (byteLength > 80)
+            (bool isValid, int byteLength) result = ValidatorService.ValidateMessage(msg);
+            if (result.isValid)
             {
-                MessageByteCounter.Text = $"⚠️ Too long: {byteLength}/80 bytes";
+                MessageByteCounter.Text = $"⚠️ Too long: {result.byteLength}/80 bytes";
                 MessageByteCounter.Foreground = Brushes.Red;
             }
             else
             {
-                MessageByteCounter.Text = $"🧮 {byteLength}/80 bytes";
+                MessageByteCounter.Text = $"🧮 {result.byteLength}/80 bytes";
                 MessageByteCounter.Foreground = Brushes.Gray;
             }
         }

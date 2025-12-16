@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
 using NBitcoin;
+using WriteUpProject.Services;
 
 
 namespace WriteUpProject.Views.Pages
@@ -16,7 +17,7 @@ namespace WriteUpProject.Views.Pages
         private void OnTxIdChanged(object? sender, TextChangedEventArgs e)
         {
             string txid = TxIdBox.Text?.Trim() ?? "";
-            if (uint256.TryParse(txid, out _))
+            if (ValidatorService.ValidateTxID(txid))
             {
                 TxIdValidator.Text = "✅ Valid TXID";
                 TxIdValidator.Foreground = Brushes.Green;
