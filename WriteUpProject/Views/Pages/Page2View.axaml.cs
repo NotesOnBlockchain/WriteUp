@@ -40,13 +40,13 @@ namespace WriteUpProject.Views.Pages
             (bool isValid, int byteLength) result = ValidatorService.ValidateMessage(msg);
             if (result.isValid)
             {
-                MessageByteCounter.Text = $"⚠️ Too long: {result.byteLength}/80 bytes";
-                MessageByteCounter.Foreground = Brushes.Red;
+                MessageByteCounter.Text = $"🧮 {result.byteLength}/80 bytes";
+                MessageByteCounter.Foreground = Brushes.Gray;
             }
             else
             {
-                MessageByteCounter.Text = $"🧮 {result.byteLength}/80 bytes";
-                MessageByteCounter.Foreground = Brushes.Gray;
+                MessageByteCounter.Text = $"⚠️ Too long: {result.byteLength}/80 bytes";
+                MessageByteCounter.Foreground = Brushes.Red;
             }
         }
 

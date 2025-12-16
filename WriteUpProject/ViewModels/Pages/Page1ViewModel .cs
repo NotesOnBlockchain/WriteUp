@@ -67,10 +67,20 @@ namespace WriteUpProject.ViewModels.Pages
         private void NavigateToPage2()
         {
             /* check for missing info */
+            if(!IsValid())
+            {
+                return;
+            }
 
             Network network = Network.GetNetwork(SelectedNetwork) ?? throw new Exception("Invalid Network.");
 
-            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, _dialogService,new FundingTxInfo(network, FundingTxId, Vout, AmountBox)));
+            _navigationService.NavigateTo(new Page2ViewModel(_navigationService, _dialogService, new FundingTxInfo(network, FundingTxId, Vout, AmountBox)));
+        }
+
+        private bool IsValid()
+        {
+            return ValidatorService.ValidateTxID(FundingTxId) && Vout is not null && AmountBox is not null;
+
         }
     }
 }

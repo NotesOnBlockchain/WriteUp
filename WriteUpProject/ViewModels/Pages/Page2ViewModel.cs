@@ -1,6 +1,5 @@
 ﻿using NBitcoin;
 using ReactiveUI;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WriteUpProject.Crypto;
@@ -52,10 +51,21 @@ namespace WriteUpProject.ViewModels.Pages
 
         private async Task SavePSBTtoDrive()
         {
+            if (!isFormValid())
+            {
+                return;
+            }
+
             OutputSideTxInfo outputSideTxInfo = new(ChangeAddress, FeeRate, CustomMessage);
             PSBT psbt = Helper.BuildTx(_receivedData, outputSideTxInfo);
 
             await _dialogService.ExportTransactionAsBinary(psbt);
+        }
+
+        private bool isFormValid()
+        {
+            (bool isValid, int byteLength) res = ValidatorService.ValidateMessage(CustomMessage);
+            return ValidatorService.ValidateChangeAddress(ChangeAddress, _receivedData.Network) && res.isValid && FeeRate is not null;
         }
     }
 }
