@@ -52,7 +52,7 @@ namespace WriteUpProject.Views.Pages
 
         private void OnFeeRateChanged(object? sender, TextChangedEventArgs e)
         {
-            if(int.TryParse(FeeRateBox.Text, out int feeRate))
+            if(decimal.TryParse(FeeRateBox.Text, out decimal feeRate))
             {
                 if (feeRate > 10)
                 {

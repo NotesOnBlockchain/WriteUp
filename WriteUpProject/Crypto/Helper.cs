@@ -40,7 +40,7 @@ namespace WriteUpProject.Crypto
             uint256 fundingTxID = uint256.Parse(fundingTxInfo.FundingTxID);
             uint vout = uint.Parse(fundingTxInfo.Vout);
             int amountInSats = int.Parse(fundingTxInfo.AmountInSats);
-            FeeRate feeRate = new FeeRate(long.Parse(outputSideTxInfo.FeeRate) * 1000);
+            FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate) * 1000);
 
             return BuildTx(network, messageBytes, fundingTxID, vout, amountInSats, changeAddress, feeRate);
         }

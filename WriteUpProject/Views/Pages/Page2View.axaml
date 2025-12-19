@@ -133,7 +133,7 @@
                         <TextBox x:Name="FeeRateBox" 
                                  Classes="modern-input"
                                  Text="{Binding FeeRate}" 
-                                 Watermark="Enter fee rate (1-10)"
+                                 Watermark="Enter fee rate (1.0-10.0)"
                                  TextChanged="OnFeeRateChanged"
                                  HorizontalAlignment="Left"/>
                         <TextBlock x:Name="FeeRateValidator" Classes="validator"/>
