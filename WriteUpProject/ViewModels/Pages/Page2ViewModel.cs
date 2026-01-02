@@ -12,7 +12,7 @@ namespace WriteUpProject.ViewModels.Pages
     public class Page2ViewModel : ViewModelBase
     {
         private readonly NavigationService _navigationService;
-        private FundingTxInfo _receivedData;
+        private FundingTxInfo _fundingTxInfo;
         private readonly DialogService _dialogService;
         private string _changeAddress;
         private string _feeRate;
@@ -42,7 +42,7 @@ namespace WriteUpProject.ViewModels.Pages
         public Page2ViewModel(NavigationService navigationService, DialogService dialogService, FundingTxInfo dataFromPage1)
         {
             _navigationService = navigationService;
-            _receivedData = dataFromPage1;
+            _fundingTxInfo = dataFromPage1;
             _dialogService = dialogService;
 
             SavePSBT = ReactiveCommand.CreateFromTask(SavePSBTtoDrive);
@@ -57,7 +57,7 @@ namespace WriteUpProject.ViewModels.Pages
             }
 
             OutputSideTxInfo outputSideTxInfo = new(ChangeAddress, FeeRate, CustomMessage);
-            PSBT psbt = Helper.BuildTx(_receivedData, outputSideTxInfo);
+            PSBT psbt = Helper.BuildTx(_fundingTxInfo, outputSideTxInfo);
 
             await _dialogService.ExportTransactionAsBinary(psbt);
         }
@@ -65,7 +65,7 @@ namespace WriteUpProject.ViewModels.Pages
         private bool isFormValid()
         {
             (bool isValid, int byteLength) res = ValidatorService.ValidateMessage(CustomMessage);
-            return ValidatorService.ValidateChangeAddress(ChangeAddress, _receivedData.Network) && res.isValid && FeeRate is not null;
+            return ValidatorService.ValidateChangeAddress(ChangeAddress, _fundingTxInfo.Network) && res.isValid && FeeRate is not null;
         }
     }
 }
