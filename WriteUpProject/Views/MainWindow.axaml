@@ -7,6 +7,8 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WriteUpProject.Views.MainWindow"
         x:DataType="vm:MainViewModel"
-        Title="WriteUp">
+        Title="WriteUp"
+        MinHeight="500"
+        MinWidth="800">
 	<ContentControl Content="{Binding CurrentViewModel}" />
 </Window>
