@@ -14,18 +14,18 @@ namespace WriteUpProject.Views.Pages
             InitializeComponent();
         }
 
-        private void OnTxIdChanged(object? sender, TextChangedEventArgs e)
+        private void OnTxHexChanged(object? sender, TextChangedEventArgs e)
         {
-            string txid = TxIdBox.Text?.Trim() ?? "";
-            if (ValidatorService.ValidateTxID(txid))
+            string txHex = TxHexBox.Text?.Trim() ?? "";
+            if (ValidatorService.ValidateTxHex(txHex))
             {
-                TxIdValidator.Text = "✅ Valid TXID";
-                TxIdValidator.Foreground = Brushes.Green;
+                TxHexValidator.Text = "✅ Valid Hex";
+                TxHexValidator.Foreground = Brushes.Green;
             }
             else
             {
-                TxIdValidator.Text = "⚠️ Invalid TXID";
-                TxIdValidator.Foreground = Brushes.Red;
+                TxHexValidator.Text = "⚠️ Invalid Hex";
+                TxHexValidator.Foreground = Brushes.Red;
             }
         }
     }

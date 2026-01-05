@@ -1,4 +1,5 @@
 ﻿using NBitcoin;
+using NBitcoin.DataEncoders;
 using System;
 using System.Text;
 using WriteUpProject.Models;
@@ -37,21 +38,24 @@ namespace WriteUpProject.Crypto
             Network network = fundingTxInfo.Network;
             byte[] messageBytes = Encoding.UTF8.GetBytes(outputSideTxInfo.Message);
             BitcoinAddress changeAddress = GetAddressFromString(outputSideTxInfo.ChangeAddress, network);
-            uint256 fundingTxID = uint256.Parse(fundingTxInfo.FundingTxID);
+            Transaction prevTx = Transaction.Parse(fundingTxInfo.FundingTxHex, network);
             uint vout = uint.Parse(fundingTxInfo.Vout);
-            int amountInSats = int.Parse(fundingTxInfo.AmountInSats);
+            ExtPubKey xpub = ExtPubKey.Parse(fundingTxInfo.Xpub, network);
+            KeyPath derivationPath = new KeyPath(fundingTxInfo.DerivationPath);
+            HDFingerprint fp = new HDFingerprint(Encoders.Hex.DecodeData(fundingTxInfo.Fingerprint));
+
             FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate) * 1000);
 
-            return BuildTx(network, messageBytes, fundingTxID, vout, amountInSats, changeAddress, feeRate);
+            return BuildTx(network, messageBytes, prevTx, vout, xpub, derivationPath, fp,changeAddress, feeRate);
         }
 
-        public static PSBT BuildTx(Network network, byte[] messageBytes, uint256 fundingTxID, uint vout, int amountSats, BitcoinAddress changeAddress, FeeRate fee)
+        public static PSBT BuildTx(Network network, byte[] messageBytes, Transaction prevTx, uint vout, ExtPubKey xpub, KeyPath derivationPath, HDFingerprint fp, BitcoinAddress changeAddress, FeeRate fee)
         {
             Script opReturnScript = TxNullDataTemplate.Instance.GenerateScriptPubKey(messageBytes);
             TxOut opReturnOutput = new(Money.Zero, opReturnScript);
 
-            Money inputAmount = new Money(amountSats, MoneyUnit.Satoshi);
-            OutPoint outpointOfFund = new OutPoint(fundingTxID, vout);
+            Money inputAmount = prevTx.Outputs[vout].Value;
+            OutPoint outpointOfFund = new OutPoint(prevTx.GetHash(), vout);
 
             TxIn txIn = new TxIn(outpointOfFund);
 
@@ -61,9 +65,14 @@ namespace WriteUpProject.Crypto
             var tx = network.CreateTransaction();
             tx.Inputs.Add(txIn);
             tx.Outputs.Add(changeOutput);
-            tx.Outputs.Add(opReturnOutput);          
+            tx.Outputs.Add(opReturnOutput);
 
-            return PSBT.FromTransaction(tx, network);
+            PSBT psbt = PSBT.FromTransaction(tx, network);
+
+            psbt.Inputs[0].NonWitnessUtxo = prevTx;
+            psbt.Inputs[0].HDKeyPaths.Add(xpub.PubKey, new RootedKeyPath(fp, derivationPath));
+
+            return psbt;
         }
 
         public static bool TryParseAddress(string address, Network network)

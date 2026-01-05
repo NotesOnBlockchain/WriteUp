@@ -1,4 +1,6 @@
 ﻿using NBitcoin;
+using System;
+using System.Buffers.Text;
 using System.Text;
 using WriteUpProject.Crypto;
 
@@ -6,13 +8,10 @@ namespace WriteUpProject.Services
 {
     public static class ValidatorService
     {
-        public static bool ValidateTxID(string txid)
+        public static bool ValidateTxHex(string base64)
         {
-            if (uint256.TryParse(txid, out _))
-            {
-                return true;
-            }
-            return false;
+            Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
+            return Convert.TryFromBase64String(base64, buffer, out int _);
         }
 
         public static bool ValidateChangeAddress(string changeAddress, Network network) 
