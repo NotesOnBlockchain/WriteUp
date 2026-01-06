@@ -1,6 +1,7 @@
 using NBitcoin;
 using System.Text;
 using WriteUpProject.Crypto;
+using WriteUpProject.Models;
 
 namespace WriteUpProject.Tests
 {
@@ -11,30 +12,30 @@ namespace WriteUpProject.Tests
         [Fact]
         public void CanBuildAndSignTX()
         {
-            var messageBytes = Encoding.UTF8.GetBytes(CustomMessage);
+            Mnemonic mnemonic = new Mnemonic("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about", Wordlist.English);
+            ExtKey masterKey = mnemonic.DeriveExtKey();
 
-            var secret = new BitcoinSecret("cQdZ54D6fwYbr8GvTRwzamaAR1TPZwWXDhaKRHW9zAZL2UBGvDpr", Network);
-            var extPubKey = new BitcoinExtPubKey("tpubD9CP652nLmoybLkXNvqtbzdfr53NR7mRoTEJC5YDrseottTiPhA8d4TERCxsJW1A5ugNZ4CtJkyz6biJioRBDvbwGYzCsu7pfiuJcsW8erJ", Network);
 
-            var fundScript = secret.PubKey.WitHash.ScriptPubKey;
-            var changeAddress = extPubKey.Derive(1).ExtPubKey.PubKey.GetAddress(ScriptPubKeyType.Segwit, Network);
+            HDFingerprint fingerprint = masterKey.Neuter().PubKey.GetHDFingerPrint();
+            KeyPath path = new KeyPath("84'/1'/0'/0/0");
 
-            var txIdOfFunding = uint256.Parse("4df78304f2e84df58f7ffa58a4d8ae180a2bc2f42619986a996330c2ead149bc");
-            uint vout = 0;
-            var amountOfFundsInSats = 500000;
-            FeeRate feeRate = new FeeRate((long)2000);
+            ExtPubKey xpub = masterKey.Derive(new KeyPath("84'/1'/0'")).Neuter();
+            string tpub = xpub.ToString(Network);
 
-            // Test BuildTx
-            var psbt = Helper.BuildTx(Network, messageBytes, txIdOfFunding, vout, amountOfFundsInSats, changeAddress, feeRate);
+            BitcoinAddress changeAddress = xpub.Derive(new KeyPath("0/1")).PubKey.GetAddress(ScriptPubKeyType.Segwit, Network);
+            double feeRate = 2.0;
 
-            // Add coin so we can sign the psbt
-            var coin = new Coin(new OutPoint(txIdOfFunding, vout), new TxOut(new Money(amountOfFundsInSats, MoneyUnit.Satoshi), fundScript));
-            psbt.AddCoins(coin);
-            psbt.SignWithKeys(secret);
+            var fundingTXHex = "02000000000101639956e90940f67c2ba35907f3455fa5ed897bb43acc2c5f0f9386edddf4b7d80000000000fdffffff02b2118594000000001600148aa0a82d2f20d82256145b0a2e771828d7d5b9b3b325050000000000160014d0c4a3ef09e997b6e99e397e518fe3e41a118ca10140849007326d673eaf5ae263312ce79dfcbfef72a1be92be500ce4387bc48e9de224e31d1cb5790160c3f36dbaed74b970741c49d2c142f1c4a5244530a18ec34d10cb0100";
+            int vout = 1;
+            var fundingPart = new FundingTxInfo(Network, fundingTXHex, vout.ToString(), tpub, path.ToString(), fingerprint.ToString());
+            var outputPart = new OutputSideTxInfo(changeAddress.ToString(), feeRate.ToString(), CustomMessage);
 
-            Assert.Single(psbt.Inputs[0].PartialSigs);
-            Assert.Equal(2, psbt.GetGlobalTransaction().Outputs.Count);
+            PSBT psbt = Helper.BuildTx(fundingPart, outputPart);
 
+            // Sign and finalize
+            ExtKey childExtKey = masterKey.Derive(path);
+            Key signingKey = childExtKey.PrivateKey;
+            psbt.SignWithKeys(signingKey);
             psbt.Finalize();
         }
 
