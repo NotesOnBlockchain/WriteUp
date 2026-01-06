@@ -44,7 +44,7 @@ namespace WriteUpProject.Crypto
             KeyPath derivationPath = new KeyPath(fundingTxInfo.DerivationPath);
             HDFingerprint fp = new HDFingerprint(Encoders.Hex.DecodeData(fundingTxInfo.Fingerprint));
 
-            FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate) * 1000);
+            FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate));
 
             return BuildTx(network, messageBytes, prevTx, vout, xpub, derivationPath, fp,changeAddress, feeRate);
         }
