@@ -15,7 +15,6 @@ namespace WriteUpProject.Tests
             Mnemonic mnemonic = new Mnemonic("abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about", Wordlist.English);
             ExtKey masterKey = mnemonic.DeriveExtKey();
 
-
             HDFingerprint fingerprint = masterKey.Neuter().PubKey.GetHDFingerPrint();
             KeyPath path = new KeyPath("84'/1'/0'/0/0");
 
@@ -24,12 +23,12 @@ namespace WriteUpProject.Tests
 
             BitcoinAddress changeAddress = xpub.Derive(new KeyPath("0/1")).PubKey.GetAddress(ScriptPubKeyType.Segwit, Network);
             double feeRate = 2.0;
-
             var fundingTXHex = "02000000000101639956e90940f67c2ba35907f3455fa5ed897bb43acc2c5f0f9386edddf4b7d80000000000fdffffff02b2118594000000001600148aa0a82d2f20d82256145b0a2e771828d7d5b9b3b325050000000000160014d0c4a3ef09e997b6e99e397e518fe3e41a118ca10140849007326d673eaf5ae263312ce79dfcbfef72a1be92be500ce4387bc48e9de224e31d1cb5790160c3f36dbaed74b970741c49d2c142f1c4a5244530a18ec34d10cb0100";
             int vout = 1;
             var fundingPart = new FundingTxInfo(Network, fundingTXHex, vout.ToString(), tpub, path.ToString(), fingerprint.ToString());
             var outputPart = new OutputSideTxInfo(changeAddress.ToString(), feeRate.ToString(), CustomMessage);
 
+            // Build PSBT
             PSBT psbt = Helper.BuildTx(fundingPart, outputPart);
 
             // Sign and finalize
