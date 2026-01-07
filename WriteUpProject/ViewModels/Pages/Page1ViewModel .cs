@@ -88,7 +88,7 @@ namespace WriteUpProject.ViewModels.Pages
 
         private bool IsValid()
         {
-            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null && Xpub is not null && DerivationPath is not null && Fingerprint is not null;
+            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null && ValidatorService.ValidateXpub(Xpub, Network.GetNetwork(SelectedNetwork)!) && ValidatorService.ValidateDerivationPath(DerivationPath) && ValidatorService.ValidateFingerprint(Fingerprint);
         }
     }
 }

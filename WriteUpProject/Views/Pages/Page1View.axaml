@@ -121,7 +121,8 @@
                     <!-- Network Selection -->
                     <StackPanel Spacing="8" Grid.Column="1" Grid.Row="0">
                         <TextBlock Classes="label" HorizontalAlignment="Center" Text="NETWORK"/>
-                        <ComboBox Classes="modern-combo"
+                        <ComboBox x:Name="NetworkCombobox"
+                                  Classes="modern-combo"
                                   ItemsSource="{Binding Networks}"
                                   SelectedItem="{Binding SelectedNetwork}"
                                   HorizontalAlignment="Stretch"
@@ -155,7 +156,9 @@
                         <TextBox x:Name="XpubBox" 
                                  Classes="modern-input"
                                  Text="{Binding Xpub}"
-                                 Watermark="Paste xpub"/>
+                                 Watermark="Paste xpub"
+                                 TextChanged="OnXpubChanged"/>
+                        <TextBlock x:Name="XpubValidator" Classes="validator"/>
                     </StackPanel>
 
                     <!-- Derivation Path -->
@@ -164,7 +167,9 @@
                         <TextBox x:Name="DerivationPathBox" 
                                  Classes="modern-input"
                                  Text="{Binding DerivationPath}"
-                                 Watermark="Derivation path of the funding script (84'/0'/0'/0/1)"/>
+                                 Watermark="Derivation path of the funding script (84'/0'/0'/0/1)"
+                                 TextChanged="OnDerivationPathChanged"/>
+                        <TextBlock x:Name="DerivationPathValidator" Classes="validator"/>
                     </StackPanel>
 
                     <!-- Fingerprint -->
@@ -173,7 +178,9 @@
                         <TextBox x:Name="FingerPrintBox" 
                                  Classes="modern-input"
                                  Text="{Binding Fingerprint}"
-                                 Watermark="Fingerprint"/>
+                                 Watermark="Fingerprint"
+                                 TextChanged="OnFingerprintChanged"/>
+                        <TextBlock x:Name="FingerprintValidator" Classes="validator"/>
                     </StackPanel>
                     
                 <StackPanel Grid.Column="1" Grid.Row="7">
