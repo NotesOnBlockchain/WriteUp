@@ -75,20 +75,20 @@ namespace WriteUpProject.ViewModels.Pages
 
         private void NavigateToPage2()
         {
+            Network network = Network.GetNetwork(SelectedNetwork) ?? throw new Exception("Invalid Network.");
+
             /* check for missing info */
-            if(!IsValid())
+            if (!IsValid(network))
             {
                 return;
             }
 
-            Network network = Network.GetNetwork(SelectedNetwork) ?? throw new Exception("Invalid Network.");
-
             _navigationService.NavigateTo(new Page2ViewModel(_navigationService, _dialogService, new FundingTxInfo(network, FundingTxHex, Vout, Xpub, DerivationPath, Fingerprint)));
         }
 
-        private bool IsValid()
+        private bool IsValid(Network network)
         {
-            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null && ValidatorService.ValidateXpub(Xpub, Network.GetNetwork(SelectedNetwork)!) && ValidatorService.ValidateDerivationPath(DerivationPath) && ValidatorService.ValidateFingerprint(Fingerprint);
+            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null && ValidatorService.ValidateXpub(Xpub, network) && ValidatorService.ValidateDerivationPath(DerivationPath) && ValidatorService.ValidateFingerprint(Fingerprint);
         }
     }
 }
