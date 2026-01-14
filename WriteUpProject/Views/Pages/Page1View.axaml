@@ -158,7 +158,6 @@
                                  Text="{Binding Xpub}"
                                  Watermark="Paste xpub"
                                  TextChanged="OnXpubChanged"/>
-                        <TextBlock x:Name="XpubValidator" Classes="validator"/>
                     </StackPanel>
 
                     <!-- Derivation Path -->

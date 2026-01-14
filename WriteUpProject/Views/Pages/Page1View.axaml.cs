@@ -29,23 +29,6 @@ namespace WriteUpProject.Views.Pages
             }
         }
 
-        private void OnXpubChanged(object? sender, TextChangedEventArgs e)
-        {
-            string xpub = XpubBox.Text?.Trim() ?? "";
-            Network selectedNetwork = Crypto.Helper.SupportedNetworks[NetworkCombobox.SelectedIndex];
-
-            if (ValidatorService.ValidateXpub(xpub, selectedNetwork)) 
-            {
-                XpubValidator.Text = "✅ Valid xpub";
-                XpubValidator.Foreground = Brushes.Green;
-            } 
-            else
-            {
-                XpubValidator.Text = "⚠️ Invalid xpub";
-                XpubValidator.Foreground = Brushes.Red;
-            }
-        }
-
         private void OnDerivationPathChanged(object? sender, TextChangedEventArgs e)
         {
             string path = DerivationPathBox.Text?.Trim() ?? "";
