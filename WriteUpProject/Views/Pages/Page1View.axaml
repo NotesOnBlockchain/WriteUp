@@ -156,8 +156,7 @@
                         <TextBox x:Name="XpubBox" 
                                  Classes="modern-input"
                                  Text="{Binding Xpub}"
-                                 Watermark="Paste xpub"
-                                 TextChanged="OnXpubChanged"/>
+                                 Watermark="Paste xpub"/>
                     </StackPanel>
 
                     <!-- Derivation Path -->
