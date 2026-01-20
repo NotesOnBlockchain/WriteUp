@@ -9,10 +9,17 @@ namespace WriteUpProject.Services
 {
     public static class ValidatorService
     {
-        public static bool ValidateTxHex(string base64)
+        public static bool ValidateTxHex(string hex)
         {
-            Span<byte> buffer = new Span<byte>(new byte[base64.Length]);
-            return Convert.TryFromBase64String(base64, buffer, out int _);
+            foreach (Network network in Crypto.Helper.SupportedNetworks)
+            {
+                if (Transaction.TryParse(hex, network, out _))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static bool ValidateXpub(string xpub, Network network)
