@@ -1,4 +1,6 @@
 using NBitcoin;
+using NBitcoin.DataEncoders;
+using System.Net;
 using System.Text;
 using WriteUpProject.Crypto;
 using WriteUpProject.Models;
@@ -44,18 +46,7 @@ namespace WriteUpProject.Tests
             var tx = Transaction.Parse("0100000001bc49d1eac23063996a981926f4c22b0a18aed8a458fa7f8ff54de8f20483f74d0000000000ffffffff02389d070000000000160014b47d3748ba615d0e3d579a7b54153fa51a5eb7d000000000000000000f6a0d54657374204d6573736167652100000000", Network);
             var opReturnOutput = tx.Outputs[1];
 
-            var script = opReturnOutput.ScriptPubKey.ExtractScriptCode(-1);
-            var parts = script.ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            string hex = parts[1];
-
-            // Convert hex -> byte[]
-            byte[] bytes = Enumerable.Range(0, hex.Length / 2)
-                .Select(i => Convert.ToByte(hex.Substring(i * 2, 2), 16))
-                .ToArray();
-
-            // Decode to string
-            string message = Encoding.UTF8.GetString(bytes);
+            string message = Crypto.Helper.ExtractMessageFromOutput(opReturnOutput);
 
             Assert.Equal(CustomMessage, message);
         }
