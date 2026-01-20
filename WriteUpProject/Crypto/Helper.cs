@@ -1,6 +1,7 @@
 ﻿using NBitcoin;
 using NBitcoin.DataEncoders;
 using System;
+using System.Linq;
 using System.Text;
 using WriteUpProject.Models;
 
@@ -119,6 +120,43 @@ namespace WriteUpProject.Crypto
 
             Money change = inputAmount - fee;
             return change;
+        }
+
+        public static Script? GetChangeAddress(Transaction transaction)
+        {
+            return transaction.Outputs.FirstOrDefault(output => output.Value > Money.Zero)?.ScriptPubKey;
+        }
+
+        public static string ExtractMessageFromOutput(TxOut txOut)
+        {
+            if (txOut.Value > Money.Zero)
+            {
+                throw new Exception("OP_RETURN output not supposed to have any value.");
+            }
+
+            var script = txOut.ScriptPubKey.ExtractScriptCode(-1);
+            var parts = script.ToString().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            string hex = parts[1];
+
+            // Convert hex -> byte[]
+            byte[] bytes = Enumerable.Range(0, hex.Length / 2)
+                .Select(i => Convert.ToByte(hex.Substring(i * 2, 2), 16))
+                .ToArray();
+
+            // Decode to string
+            string message = Encoding.UTF8.GetString(bytes);
+            return message;
+        }
+
+        public static int ExtractFee(Transaction createdTx, FundingTxInfo fundingTxInfo)
+        {
+            Transaction fundingTx = Transaction.Parse(fundingTxInfo.FundingTxHex, fundingTxInfo.Network);
+            Money fundingOutputValue = fundingTx.Outputs[int.Parse(fundingTxInfo.Vout)].Value;
+
+            Money customMessageTxOutput = createdTx.Outputs.FirstOrDefault(output => output.Value > Money.Zero)?.Value ?? throw new Exception("Didn't create change output. Aborting.");
+
+            return (int)fundingOutputValue.Satoshi - (int)customMessageTxOutput.Satoshi;
         }
     }
 }
