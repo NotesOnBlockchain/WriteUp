@@ -1,0 +1,124 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:WriteUpProject.ViewModels.Pages"
+             x:Class="WriteUpProject.Views.Pages.TxPreviewPageView"
+             x:DataType="vm:TxPreviewPageViewModel">
+     <UserControl.Styles>
+        <!-- Modern Card Style -->
+        <Style Selector="Border.card">
+            <Setter Property="Background" Value="#1e1e1e"/>
+            <Setter Property="BoxShadow" Value="0 4 20 0 #0a000000"/>
+            <Setter Property="Padding" Value="24"/>
+        </Style>
+        
+        <!-- Label Style -->
+        <Style Selector="TextBlock.label">
+            <Setter Property="Foreground" Value="#a0a0a0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="5 0 0 0"/>
+        </Style>
+         
+         <!-- TextBlock Style -->
+         <Style Selector="TextBlock.box">
+            <Setter Property="Background" Value="#2a2a2a"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="Padding" Value="12 10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 0 5 10"/>
+        </Style>
+        
+        <!-- Button Style -->
+        <Style Selector="Button.primary-button">
+            <Setter Property="Background" Value="#4a9eff"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="24 12"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style Selector="Button.primary-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#5ca9ff"/>
+        </Style>
+        <Style Selector="Button.primary-button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#3a8eef"/>
+        </Style>
+        
+        <!-- Header Style -->
+        <Style Selector="TextBlock.header">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0 0 0 0"/>
+        </Style>
+        
+        <Style Selector="TextBlock.subheader">
+            <Setter Property="Foreground" Value="#808080"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 0 0 26"/>
+        </Style>
+    </UserControl.Styles>
+  <ScrollViewer>
+	  <Border Classes="card" MinWidth="600">
+		  <Grid ColumnDefinitions="1.5*, *" RowDefinitions="*, *, *, *, *, *">
+
+               <!-- Header Section -->
+                <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Spacing="12" VerticalAlignment="Top">
+                        <TextBlock Classes="header" Text="TX Preview"/>
+                        <TextBlock Classes="subheader" Text="Review your transaction before saving and signing"/>
+                </StackPanel>
+
+              <!-- Inputs -->
+            <StackPanel Grid.Row="4" Grid.Column="0" Spacing="12">
+                <TextBlock Classes="label" Text="Input Count"/>
+                <TextBlock Classes="box" Text="{Binding InputCount}" />
+            </StackPanel>
+
+              <!-- Outputs -->
+              <StackPanel Grid.Row="4" Grid.Column="1" Spacing="12">
+                <TextBlock Classes="label" Text="Output Count"/>
+                <TextBlock Classes="box" Text="{Binding OutputCount}" />
+            </StackPanel>
+
+              <!-- Change address -->
+              <StackPanel Grid.Row="2" Grid.Column="0" Spacing="12">
+                <TextBlock Classes="label" Text="Change Address"/>
+                <TextBlock Classes="box" Text="{Binding ChangeAddress}" />
+            </StackPanel>
+
+              <!-- Message -->
+              <StackPanel Grid.Row="1" Grid.Column="0" Spacing="12">
+                <TextBlock Classes="label" Text="Your message"/>
+                <TextBlock Classes="box" Text="{Binding Message}" />
+            </StackPanel>
+
+              <!-- Fee -->
+              <StackPanel Grid.Row="3" Grid.Column="0" Spacing="12">
+                <TextBlock Classes="label" Text="Fee"/>
+                <TextBlock Classes="box" Text="{Binding Fee}" />
+            </StackPanel>
+
+              <!-- Buttons -->
+              <StackPanel Grid.Column="1" Grid.Row="5">
+					    <Button Classes="primary-button"
+                                Content="Finish and save PSBT"
+                                HorizontalContentAlignment="Center"
+                                Command="{Binding SavePSBT}"
+                                HorizontalAlignment="Stretch"
+                                Margin="0 16 0 0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="5">
+					        <Button Classes="primary-button"
+                                    Content="Back"
+                                    HorizontalContentAlignment="Center"
+                                    Command="{Binding NavigateBackCommand}"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0 16 200 0"/>
+                        </StackPanel>
+
+          </Grid>
+      </Border>
+  </ScrollViewer>
+</UserControl>
