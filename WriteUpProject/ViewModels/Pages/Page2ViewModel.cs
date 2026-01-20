@@ -36,7 +36,7 @@ namespace WriteUpProject.ViewModels.Pages
             set => SetProperty(ref _customMessage, value);
         }
 
-        public ICommand SavePSBT { get; }
+        public ICommand NavigateToTxPreviewCommand { get; }
         public ICommand NavigateBackCommand { get; }
 
         public Page2ViewModel(NavigationService navigationService, DialogService dialogService, FundingTxInfo dataFromPage1)
@@ -45,11 +45,11 @@ namespace WriteUpProject.ViewModels.Pages
             _fundingTxInfo = dataFromPage1;
             _dialogService = dialogService;
 
-            SavePSBT = ReactiveCommand.CreateFromTask(SavePSBTtoDrive);
+            NavigateToTxPreviewCommand = ReactiveCommand.Create(NavigateToTxPreview);
             NavigateBackCommand = ReactiveCommand.Create(_navigationService.NavigateBack);
         }
 
-        private async Task SavePSBTtoDrive()
+        private void NavigateToTxPreview()
         {
             if (!isFormValid())
             {
@@ -59,7 +59,7 @@ namespace WriteUpProject.ViewModels.Pages
             OutputSideTxInfo outputSideTxInfo = new(ChangeAddress, FeeRate, CustomMessage);
             PSBT psbt = Helper.BuildTx(_fundingTxInfo, outputSideTxInfo);
 
-            await _dialogService.ExportTransactionAsBinary(psbt);
+            _navigationService.NavigateTo(new TxPreviewPageViewModel(_navigationService, _dialogService, psbt, _fundingTxInfo));
         }
 
         private bool isFormValid()

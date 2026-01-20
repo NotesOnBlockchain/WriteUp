@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
-using NBitcoin;
 using WriteUpProject.Services;
 
 

@@ -152,9 +152,9 @@
 
                     <StackPanel Grid.Column="1" Grid.Row="4">
 					    <Button Classes="primary-button"
-                                Content="Finish and save PSBT"
+                                Content="Next"
                                 HorizontalContentAlignment="Center"
-                                Command="{Binding SavePSBT}"
+                                Command="{Binding NavigateToTxPreviewCommand}"
                                 HorizontalAlignment="Stretch"
                                 Margin="0 16 0 0"/>
                     </StackPanel>
@@ -164,7 +164,8 @@
                                     HorizontalContentAlignment="Center"
                                     Command="{Binding NavigateBackCommand}"
                                     HorizontalAlignment="Stretch"
-                                    Margin="0 16 200 0"/>
+                                    Margin="0 16 200 0"
+                                    MinWidth="100"/>
                         </StackPanel>
             </Grid>
         </Border>
