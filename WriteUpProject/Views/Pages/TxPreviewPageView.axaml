@@ -16,7 +16,7 @@
             <Setter Property="Foreground" Value="#a0a0a0"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Margin" Value="5 0 0 0"/>
+            <Setter Property="Margin" Value="5 5 0 -5"/>
         </Style>
          
          <!-- TextBox Style -->
@@ -28,6 +28,7 @@
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Padding" Value="12 10"/>
             <Setter Property="FontSize" Value="14"/>
+             <Setter Property="Margin" Value="0 0 0 10" />
         </Style>
         <Style Selector="TextBox.modern-input:focus">
             <Setter Property="BorderBrush" Value="#4a9eff"/>
@@ -78,13 +79,44 @@
                         <TextBlock Classes="header" Text="TX Preview"/>
                         <TextBlock Classes="subheader" Text="Review your transaction before saving and signing"/>
                 </StackPanel>
+              
+              
+              <!-- Message -->
+              <StackPanel Grid.Row="1" Grid.Column="0" Spacing="12" Grid.ColumnSpan="2">
+                <TextBlock Classes="label" Text="Your message"/>
+                <TextBox Classes="modern-input" 
+                         Text="{Binding Message}"
+                         IsReadOnly="True"/>
+            </StackPanel>
+
+              <!-- Change address -->
+              <StackPanel Grid.Row="2" Grid.Column="0" Spacing="12" Grid.ColumnSpan="2">
+                <TextBlock Classes="label" Text="Change Address"/>
+                <TextBox Classes="modern-input" 
+                         Text="{Binding ChangeAddress}"
+                         IsReadOnly="True"/>
+            </StackPanel>
+
+              <!-- Fee -->
+              <StackPanel Grid.Row="3" Grid.Column="0" Spacing="12">
+                <TextBlock Classes="label" Text="Fee (in sats)"/>
+                <TextBox Classes="modern-input" 
+                         Text="{Binding Fee}"
+                         IsReadOnly="True"
+                         MaxWidth="300"
+                         MinWidth="100"
+                         HorizontalAlignment="Left"/>
+            </StackPanel>
 
               <!-- Inputs -->
             <StackPanel Grid.Row="4" Grid.Column="0" Spacing="12">
                 <TextBlock Classes="label" Text="Input Count"/>
                 <TextBox Classes="modern-input"
                          Text="{Binding InputCount}"
-                         IsReadOnly="True"/>
+                         IsReadOnly="True"
+                         MaxWidth="300"
+                         MinWidth="100"
+                         HorizontalAlignment="Left"/>
             </StackPanel>
 
               <!-- Outputs -->
@@ -92,31 +124,10 @@
                 <TextBlock Classes="label" Text="Output Count"/>
                 <TextBox Classes="modern-input" 
                          Text="{Binding OutputCount}"
-                         IsReadOnly="True"/>
-            </StackPanel>
-
-              <!-- Change address -->
-              <StackPanel Grid.Row="2" Grid.Column="0" Spacing="12">
-                <TextBlock Classes="label" Text="Change Address"/>
-                <TextBox Classes="modern-input" 
-                         Text="{Binding ChangeAddress}"
-                         IsReadOnly="True"/>
-            </StackPanel>
-
-              <!-- Message -->
-              <StackPanel Grid.Row="1" Grid.Column="0" Spacing="12">
-                <TextBlock Classes="label" Text="Your message"/>
-                <TextBox Classes="modern-input" 
-                         Text="{Binding Message}"
-                         IsReadOnly="True"/>
-            </StackPanel>
-
-              <!-- Fee -->
-              <StackPanel Grid.Row="3" Grid.Column="0" Spacing="12">
-                <TextBlock Classes="label" Text="Fee"/>
-                <TextBox Classes="modern-input" 
-                         Text="{Binding Fee}"
-                         IsReadOnly="True"/>
+                         IsReadOnly="True"
+                         MaxWidth="300"
+                         MinWidth="100"
+                         HorizontalAlignment="Left"/>
             </StackPanel>
 
               <!-- Buttons -->
