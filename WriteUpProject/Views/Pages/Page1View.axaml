@@ -88,7 +88,7 @@
         <Style Selector="TextBlock.validator">
             <Setter Property="Foreground" Value="#ff6b6b"/>
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Margin" Value="0 0 0 0"/>
+            <Setter Property="Margin" Value="0 -2 0 4"/>
         </Style>
         
         <!-- Header Style -->
@@ -130,8 +130,8 @@
                                   MaxWidth="150"/>
                 </StackPanel>
                     
-                    <!-- TXID Input -->
-                    <StackPanel Spacing="8" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+                    <!-- Funding Hex -->
+                    <StackPanel Spacing="4" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
                         <TextBlock Classes="label" Text="Funding Transaction Hex (Base64)"/>
                         <TextBox x:Name="TxHexBox" 
                                  Classes="modern-input"

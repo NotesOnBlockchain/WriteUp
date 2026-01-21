@@ -19,13 +19,22 @@
             <Setter Property="Margin" Value="5 0 0 0"/>
         </Style>
          
-         <!-- TextBlock Style -->
-         <Style Selector="TextBlock.box">
+         <!-- TextBox Style -->
+         <Style Selector="TextBox.modern-input">
             <Setter Property="Background" Value="#2a2a2a"/>
             <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="BorderBrush" Value="#3a3a3a"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Padding" Value="12 10"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Margin" Value="0 0 5 10"/>
+        </Style>
+        <Style Selector="TextBox.modern-input:focus">
+            <Setter Property="BorderBrush" Value="#4a9eff"/>
+            <Setter Property="Background" Value="#2d2d2d"/>
+        </Style>
+        <Style Selector="TextBox.modern-input:pointerover">
+            <Setter Property="BorderBrush" Value="#4a4a4a"/>
         </Style>
         
         <!-- Button Style -->
@@ -73,31 +82,41 @@
               <!-- Inputs -->
             <StackPanel Grid.Row="4" Grid.Column="0" Spacing="12">
                 <TextBlock Classes="label" Text="Input Count"/>
-                <TextBlock Classes="box" Text="{Binding InputCount}" />
+                <TextBox Classes="modern-input"
+                         Text="{Binding InputCount}"
+                         IsReadOnly="True"/>
             </StackPanel>
 
               <!-- Outputs -->
               <StackPanel Grid.Row="4" Grid.Column="1" Spacing="12">
                 <TextBlock Classes="label" Text="Output Count"/>
-                <TextBlock Classes="box" Text="{Binding OutputCount}" />
+                <TextBox Classes="modern-input" 
+                         Text="{Binding OutputCount}"
+                         IsReadOnly="True"/>
             </StackPanel>
 
               <!-- Change address -->
               <StackPanel Grid.Row="2" Grid.Column="0" Spacing="12">
                 <TextBlock Classes="label" Text="Change Address"/>
-                <TextBlock Classes="box" Text="{Binding ChangeAddress}" />
+                <TextBox Classes="modern-input" 
+                         Text="{Binding ChangeAddress}"
+                         IsReadOnly="True"/>
             </StackPanel>
 
               <!-- Message -->
               <StackPanel Grid.Row="1" Grid.Column="0" Spacing="12">
                 <TextBlock Classes="label" Text="Your message"/>
-                <TextBlock Classes="box" Text="{Binding Message}" />
+                <TextBox Classes="modern-input" 
+                         Text="{Binding Message}"
+                         IsReadOnly="True"/>
             </StackPanel>
 
               <!-- Fee -->
               <StackPanel Grid.Row="3" Grid.Column="0" Spacing="12">
                 <TextBlock Classes="label" Text="Fee"/>
-                <TextBlock Classes="box" Text="{Binding Fee}" />
+                <TextBox Classes="modern-input" 
+                         Text="{Binding Fee}"
+                         IsReadOnly="True"/>
             </StackPanel>
 
               <!-- Buttons -->
@@ -115,6 +134,7 @@
                                     HorizontalContentAlignment="Center"
                                     Command="{Binding NavigateBackCommand}"
                                     HorizontalAlignment="Stretch"
+                                    MaxWidth="200"
                                     Margin="0 16 200 0"/>
                         </StackPanel>
 
