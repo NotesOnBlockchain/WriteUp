@@ -41,11 +41,18 @@ namespace WriteUpProject.Crypto
             BitcoinAddress changeAddress = GetAddressFromString(outputSideTxInfo.ChangeAddress, network);
             Transaction prevTx = Transaction.Parse(fundingTxInfo.FundingTxHex, network);
             uint vout = uint.Parse(fundingTxInfo.Vout);
+            FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate));
+
+            // Legacy wallet
+            if (fundingTxInfo.Xpub is null || fundingTxInfo.DerivationPath is null || fundingTxInfo.Fingerprint is null)
+            {
+                return BuildTx(network, messageBytes, prevTx, vout, changeAddress, feeRate);
+            }
+
             ExtPubKey xpub = ExtPubKey.Parse(fundingTxInfo.Xpub, network);
             KeyPath derivationPath = new KeyPath(fundingTxInfo.DerivationPath);
             HDFingerprint fp = new HDFingerprint(Encoders.Hex.DecodeData(fundingTxInfo.Fingerprint));
 
-            FeeRate feeRate = new FeeRate(decimal.Parse(outputSideTxInfo.FeeRate));
 
             return BuildTx(network, messageBytes, prevTx, vout, xpub, derivationPath, fp,changeAddress, feeRate);
         }
@@ -73,6 +80,29 @@ namespace WriteUpProject.Crypto
             psbt.Inputs[0].NonWitnessUtxo = prevTx;
             psbt.Inputs[0].HDKeyPaths.Add(xpub.PubKey, new RootedKeyPath(fp, derivationPath));
 
+            return psbt;
+        }
+
+        // Legacy wallet support
+        public static PSBT BuildTx(Network network, byte[] messageBytes, Transaction prevTx, uint vout, BitcoinAddress changeAddress, FeeRate fee)
+        {
+            Script opReturnScript = TxNullDataTemplate.Instance.GenerateScriptPubKey(messageBytes);
+            TxOut opReturnOutput = new(Money.Zero, opReturnScript);
+
+            Money inputAmount = prevTx.Outputs[vout].Value;
+            OutPoint outpointOfFund = new OutPoint(prevTx.GetHash(), vout);
+
+            TxIn txIn = new TxIn(outpointOfFund);
+
+            Money change = CalcChangeForSelfSpend(network, outpointOfFund, inputAmount, changeAddress.ScriptPubKey, opReturnScript, fee);
+            TxOut changeOutput = new TxOut(change, changeAddress);
+
+            var tx = network.CreateTransaction();
+            tx.Inputs.Add(txIn);
+            tx.Outputs.Add(changeOutput);
+            tx.Outputs.Add(opReturnOutput);
+
+            PSBT psbt = PSBT.FromTransaction(tx, network);
             return psbt;
         }
 
