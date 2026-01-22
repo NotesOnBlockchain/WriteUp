@@ -16,9 +16,9 @@ namespace WriteUpProject.ViewModels.Pages
         private string _selectedNetwork = "Main";
         private string _fundingTxHex;
         private string _vout;
-        private string _xpub;
-        private string _derivationPath;
-        private string _fingerprint;
+        private string? _xpub;
+        private string? _derivationPath;
+        private string? _fingerprint;
 
         public List<string> Networks { get; } = new()
         {
@@ -46,19 +46,19 @@ namespace WriteUpProject.ViewModels.Pages
             set => SetProperty(ref _vout, value);
         }
 
-        public string Xpub
+        public string? Xpub
         {
             get => _xpub;
             set => SetProperty(ref _xpub, value);
         }
 
-        public string DerivationPath
+        public string? DerivationPath
         {
             get => _derivationPath;
             set => SetProperty(ref _derivationPath, value);
         }
 
-        public string Fingerprint
+        public string? Fingerprint
         {
             get => _fingerprint;
             set => SetProperty(ref _fingerprint, value);
@@ -88,7 +88,7 @@ namespace WriteUpProject.ViewModels.Pages
 
         private bool IsValid(Network network)
         {
-            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null && ValidatorService.ValidateXpub(Xpub, network) && ValidatorService.ValidateDerivationPath(DerivationPath) && ValidatorService.ValidateFingerprint(Fingerprint);
+            return ValidatorService.ValidateTxHex(FundingTxHex) && Vout is not null;
         }
     }
 }
