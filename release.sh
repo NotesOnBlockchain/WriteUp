@@ -3,7 +3,7 @@ set -euo pipefail
 
 APP_NAME="WriteUpProject"
 PROJECT_PATH="WriteUpProject.Desktop/WriteUpProject.Desktop.csproj"
-VERSION="1.0.0"
+VERSION="0.1.0"
 RUNTIME="linux-x64"
 PUBLISH_DIR="dist/${RUNTIME}"
 
@@ -43,7 +43,7 @@ Version: ${VERSION}
 Section: utils
 Priority: optional
 Architecture: amd64
-Maintainer: Petho Adam <petho.adam911@gmail.com>
+Maintainer: Petho Adam <petho.adam@hotmail.com>
 Description: Write unchangeable message onto the Blockchain.
  A small desktop app for creating PSBTs with custom OP_RETURN outputs.
 EOF
@@ -52,6 +52,6 @@ EOF
 cp -r "/home/adam/Desktop/WriteUpApp/dist/${RUNTIME}" "/home/adam/Desktop/WriteUpApp/dist/${PKG_DIR}/usr/local/bin/${APP_NAME}"
 
 # Build the .deb
-dpkg-deb --build "/home/adam/Desktop/WriteUpApp/dist/${PKG_DIR}" "/home/adam/Desktop/WriteUpApp/dist/${APP_NAME}.deb"
+dpkg-deb --build "/home/adam/Desktop/WriteUpApp/dist/${PKG_DIR}" "/home/adam/Desktop/WriteUpApp/dist/${APP_NAME}-${VERSION}.deb"
 
 echo "=== Packages created ==="
